@@ -25,4 +25,15 @@ class TimetableControllerTest(@Autowired val timetableController: TimetableContr
 
         assertThat(passedDates).isNotEmpty
     }
+
+    @Test
+    fun `ensure that the list of dates passed to the view contains 14 dates`() {
+        var passedModelAndView: ModelAndView
+        val passedDates: List<LocalDate>
+
+        passedModelAndView = timetableController.showTimetableForNextTwoWeeksInView()
+        passedDates = passedModelAndView.model.get("dates") as List<LocalDate>
+
+        assertThat(passedDates).hasSize(14)
+    }
 }
