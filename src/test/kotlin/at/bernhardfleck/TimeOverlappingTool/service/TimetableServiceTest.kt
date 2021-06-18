@@ -22,4 +22,21 @@ class TimetableServiceTest(@Autowired val timetableService: TimetableService) {
 
         assertThat(firstDate).isEqualTo(tomorrow)
     }
+
+    @Test
+    fun `ensure list of the next two weeks ends with today plus 14 days`() {
+        val tomorrow = now().plusDays(1)
+        val expectedEnd = tomorrow.plusDays(13) // because 14th day is exlusive
+        val datesOfNextTwoWeeks: List<LocalDate>
+        val lastDate: LocalDate
+        val lastIndex: Int
+
+        datesOfNextTwoWeeks = timetableService.getListOfNextTwoWeeks()
+        lastIndex = datesOfNextTwoWeeks.size - 1
+        lastDate = datesOfNextTwoWeeks.get(lastIndex)
+
+        assertThat(lastDate).isEqualTo(expectedEnd)
+    }
+
+
 }
