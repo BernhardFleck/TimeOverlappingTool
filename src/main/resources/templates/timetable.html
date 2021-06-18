@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Timetable</title>
+</head>
+<body>
+
+<form action="/" method="post">
+    <table>
+        <thead>
+        <tr>
+            <th>Dates of the next 14 days</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="date, status : ${dates}">
+            <td>
+                <label>
+                    <span th:text="${date}"></span>
+                    <input type="checkbox" th:id="date + ${status.index}" th:name="date + ${status.index}"
+                           th:value="${date}"/>
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+</body>
+</html>
