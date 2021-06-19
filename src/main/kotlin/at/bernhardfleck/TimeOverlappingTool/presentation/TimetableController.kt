@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView
 class TimetableController(@Autowired val timetableService: TimetableService) {
 
     @GetMapping("/showNextTwoWeeks")
-    fun showTimetableForNextTwoWeeksInView(): ModelAndView {
+    fun showSurveyInView(): ModelAndView {
         var modelAndView = ModelAndView()
         val datesOfNextTwoWeeks = timetableService.getListOfNextTwoWeeks()
 
