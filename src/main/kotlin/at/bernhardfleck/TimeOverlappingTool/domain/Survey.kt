@@ -27,7 +27,8 @@ class Survey(
     fun validate() {
         if (minimumParticipantsForMatch < 2) throw IllegalArgumentException("it needs two people for a match at least")
         purpose.ifBlank { throw IllegalArgumentException("purpose must not be blank") }
-        participants.ifEmpty { throw IllegalArgumentException("participants must not be blank on creation") }
+        listOfSelectedDates.ifEmpty { throw IllegalArgumentException("creating a survey without selecting dates is pointless") }
+        participants.ifEmpty { throw IllegalArgumentException("the creator has to be part of the participants at least") }
         participants.forEach { it.validate() }
     }
 }
