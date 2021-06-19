@@ -25,8 +25,9 @@ class Survey(
 ) : AbstractPersistable<UUID>() {
 
     fun validate() {
-        participants.forEach { it.validate() }
-        purpose.ifBlank { throw IllegalArgumentException("purpose must not be blank") }
         if (minimumParticipantsForMatch < 2) throw IllegalArgumentException("it needs two people for a match at least")
+        purpose.ifBlank { throw IllegalArgumentException("purpose must not be blank") }
+        participants.ifEmpty { throw IllegalArgumentException("participants must not be blank on creation") }
+        participants.forEach { it.validate() }
     }
 }
