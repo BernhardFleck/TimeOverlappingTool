@@ -101,4 +101,59 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         }
     }
 
+    @Test
+    fun `given a minimum of participants for a match of minus one throws an exception`() {
+        val firstName = "John"
+        val lastName = "Doe"
+        val purpose = "SoccerNight"
+        val minimumParticipantsForMatch = -1
+        val startDate = LocalDate.of(2021, 6, 19)
+        val endDate = LocalDate.of(2021, 7, 3)
+        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val creator = Participant(firstName, lastName)
+        val participants = listOf(creator)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+
+        assertThrows(IllegalArgumentException::class.java) {
+            surveyService.saveAfterValidationOf(survey)
+        }
+    }
+
+    @Test
+    fun `given a minimum of participants for a match of zero throws an exception`() {
+        val firstName = "John"
+        val lastName = "Doe"
+        val purpose = "SoccerNight"
+        val minimumParticipantsForMatch = 0
+        val startDate = LocalDate.of(2021, 6, 19)
+        val endDate = LocalDate.of(2021, 7, 3)
+        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val creator = Participant(firstName, lastName)
+        val participants = listOf(creator)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+
+        assertThrows(IllegalArgumentException::class.java) {
+            surveyService.saveAfterValidationOf(survey)
+        }
+    }
+
+    @Test
+    fun `given a minimum of participants for a match of plus one throws an exception`() {
+        val firstName = "John"
+        val lastName = "Doe"
+        val purpose = "SoccerNight"
+        val minimumParticipantsForMatch = 1
+        val startDate = LocalDate.of(2021, 6, 19)
+        val endDate = LocalDate.of(2021, 7, 3)
+        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val creator = Participant(firstName, lastName)
+        val participants = listOf(creator)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+
+        assertThrows(IllegalArgumentException::class.java) {
+            surveyService.saveAfterValidationOf(survey)
+        }
+    }
+
+
 }

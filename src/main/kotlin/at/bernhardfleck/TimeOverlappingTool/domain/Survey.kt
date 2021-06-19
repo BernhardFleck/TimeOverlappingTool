@@ -27,5 +27,6 @@ class Survey(
     fun validate() {
         participants.forEach { it.validate() }
         purpose.ifBlank { throw IllegalArgumentException("purpose must not be blank") }
+        if (minimumParticipantsForMatch < 2) throw IllegalArgumentException("it needs two people for a match at least")
     }
 }
