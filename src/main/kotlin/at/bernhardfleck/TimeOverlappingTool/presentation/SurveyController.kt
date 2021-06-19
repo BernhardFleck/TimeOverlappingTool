@@ -16,7 +16,7 @@ class SurveyController(@Autowired val surveyService: SurveyService) {
         var modelAndView = ModelAndView()
         val datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
 
-        modelAndView.viewName = "timetable"
+        modelAndView.viewName = "survey"
         modelAndView.addObject("dates", datesOfNextTwoWeeks)
 
         return modelAndView
