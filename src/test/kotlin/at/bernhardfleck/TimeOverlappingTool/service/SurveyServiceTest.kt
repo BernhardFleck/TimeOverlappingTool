@@ -3,11 +3,13 @@ package at.bernhardfleck.TimeOverlappingTool.service
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import java.time.LocalDate
 import java.time.LocalDate.now
+
 
 @SpringBootTest
 class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
@@ -56,10 +58,28 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val participants = listOf(creator)
         var survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
 
-        survey = surveyService.save(survey)
+        survey = surveyService.saveAfterValidationOf(survey)
 
         assertThat(survey.id).isNotNull
         assertThat(survey.participants).hasSizeGreaterThan(0)
         assertThat(survey.participants).contains(creator)
+    }
+
+    @Test
+    fun `ensure that a saved survey consisting of blank names of the creator throws an exception`() {
+        val firstName = ""
+        val lastName = "  "
+        val purpose = "SoccerNight"
+        val minimumParticipantsForMatch = 5
+        val startDate = LocalDate.of(2021, 6, 19)
+        val endDate = LocalDate.of(2021, 7, 3)
+        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val creator = Participant(firstName, lastName)
+        val participants = listOf(creator)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+
+        assertThrows(IllegalArgumentException::class.java) {
+            surveyService.saveAfterValidationOf(survey)
+        }
     }
 }

@@ -20,7 +20,8 @@ class SurveyService(@Autowired val surveyRepository: SurveyRepository) {
             .collect(Collectors.toList())
     }
 
-    fun save(survey: Survey): Survey {
+    fun saveAfterValidationOf(survey: Survey): Survey {
+        survey.validate()
         return surveyRepository.saveAndFlush(survey)
     }
 }

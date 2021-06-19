@@ -22,4 +22,9 @@ class Survey(
 
     @ElementCollection
     val listOfSelectedDates: List<LocalDate>
-) : AbstractPersistable<UUID>()
+) : AbstractPersistable<UUID>() {
+
+    fun validate() {
+        participants.forEach { it.validate() }
+    }
+}
