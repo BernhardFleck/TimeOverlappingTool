@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
 
 @Controller
-@RequestMapping("/timetable")
+@RequestMapping("/survey")
 class SurveyController(@Autowired val surveyService: SurveyService) {
 
-    @GetMapping("/showNextTwoWeeks")
+    @GetMapping("/show")
     fun showSurveyInView(): ModelAndView {
         var modelAndView = ModelAndView()
         val datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
