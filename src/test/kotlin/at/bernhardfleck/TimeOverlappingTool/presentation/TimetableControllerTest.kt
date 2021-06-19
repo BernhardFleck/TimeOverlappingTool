@@ -20,7 +20,7 @@ class TimetableControllerTest(@Autowired val timetableController: TimetableContr
         var passedModelAndView: ModelAndView
         val passedDates: List<LocalDate>
 
-        passedModelAndView = timetableController.showTimetableForNextTwoWeeksInView()
+        passedModelAndView = timetableController.showSurveyInView()
         passedDates = passedModelAndView.model.get("dates") as List<LocalDate>
 
         assertThat(passedDates).isNotEmpty
@@ -31,9 +31,10 @@ class TimetableControllerTest(@Autowired val timetableController: TimetableContr
         var passedModelAndView: ModelAndView
         val passedDates: List<LocalDate>
 
-        passedModelAndView = timetableController.showTimetableForNextTwoWeeksInView()
+        passedModelAndView = timetableController.showSurveyInView()
         passedDates = passedModelAndView.model.get("dates") as List<LocalDate>
 
         assertThat(passedDates).hasSize(14)
     }
+
 }
