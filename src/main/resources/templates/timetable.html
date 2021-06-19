@@ -21,6 +21,11 @@
             What is the purpose of the survey?
             <input type="text" id="purposeField" th:name="purposeField" placeholder="Meet, Greet And Eat"/>
         </label>
+        <label>
+            How many participants are needed for a match*?
+            <input type="number" id="minimumParticipantsFields" th:name="minimumParticipantsFields" placeholder="2"
+                   min="2"/>
+        </label>
     </fieldset>
     <table>
         <thead>
@@ -40,7 +45,15 @@
         </tr>
         </tbody>
     </table>
+    <label>
+        You cannot change your submission afterwards, so better be sure that you selected the right dates
+        <br/>
+        <input type="submit" id="submitButton" value="Submit"/>
+    </label>
 </form>
-
+<p>
+    <sup>*</sup>A match is considered as an overlapping of the required participants on a certain date to be able to
+    start the event
+</p>
 </body>
 </html>
