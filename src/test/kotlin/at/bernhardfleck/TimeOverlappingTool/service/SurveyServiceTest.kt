@@ -82,4 +82,23 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
             surveyService.saveAfterValidationOf(survey)
         }
     }
+
+    @Test
+    fun `ensure that a saved survey consisting of a blank purpose throws an exception`() {
+        val firstName = "John"
+        val lastName = "Doe"
+        val purpose = "  "
+        val minimumParticipantsForMatch = 5
+        val startDate = LocalDate.of(2021, 6, 19)
+        val endDate = LocalDate.of(2021, 7, 3)
+        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val creator = Participant(firstName, lastName)
+        val participants = listOf(creator)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+
+        assertThrows(IllegalArgumentException::class.java) {
+            surveyService.saveAfterValidationOf(survey)
+        }
+    }
+
 }

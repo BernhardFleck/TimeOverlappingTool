@@ -26,5 +26,6 @@ class Survey(
 
     fun validate() {
         participants.forEach { it.validate() }
+        purpose.ifBlank { throw IllegalArgumentException("purpose must not be blank") }
     }
 }
