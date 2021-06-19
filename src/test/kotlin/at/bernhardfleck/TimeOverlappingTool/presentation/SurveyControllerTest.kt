@@ -8,11 +8,11 @@ import org.springframework.web.servlet.ModelAndView
 import java.time.LocalDate
 
 @SpringBootTest
-class TimetableControllerTest(@Autowired val timetableController: TimetableController) {
+class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
 
     @Test
     fun `ensure that dependency injection works with timetableController`() {
-        assertThat(timetableController).isNotNull
+        assertThat(surveyController).isNotNull
     }
 
     @Test
@@ -20,7 +20,7 @@ class TimetableControllerTest(@Autowired val timetableController: TimetableContr
         var passedModelAndView: ModelAndView
         val passedDates: List<LocalDate>
 
-        passedModelAndView = timetableController.showSurveyInView()
+        passedModelAndView = surveyController.showSurveyInView()
         passedDates = passedModelAndView.model.get("dates") as List<LocalDate>
 
         assertThat(passedDates).isNotEmpty
@@ -28,10 +28,10 @@ class TimetableControllerTest(@Autowired val timetableController: TimetableContr
 
     @Test
     fun `ensure that the list of dates passed to the view contains 14 dates`() {
-        var passedModelAndView: ModelAndView
+        val passedModelAndView: ModelAndView
         val passedDates: List<LocalDate>
 
-        passedModelAndView = timetableController.showSurveyInView()
+        passedModelAndView = surveyController.showSurveyInView()
         passedDates = passedModelAndView.model.get("dates") as List<LocalDate>
 
         assertThat(passedDates).hasSize(14)

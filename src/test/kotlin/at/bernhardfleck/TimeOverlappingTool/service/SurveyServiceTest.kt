@@ -10,7 +10,7 @@ import java.time.LocalDate
 import java.time.LocalDate.now
 
 @SpringBootTest
-class TimetableServiceTest(@Autowired val timetableService: TimetableService) {
+class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
 
     @Test
     fun `ensure list of the next two weeks starts with tomorrow`() {
@@ -19,7 +19,7 @@ class TimetableServiceTest(@Autowired val timetableService: TimetableService) {
         val datesOfNextTwoWeeks: List<LocalDate>
         val firstDate: LocalDate
 
-        datesOfNextTwoWeeks = timetableService.getListOfNextTwoWeeks()
+        datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
         firstDate = datesOfNextTwoWeeks.get(0)
 
         assertThat(firstDate).isEqualTo(tomorrow)
@@ -33,7 +33,7 @@ class TimetableServiceTest(@Autowired val timetableService: TimetableService) {
         val lastDate: LocalDate
         val lastIndex: Int
 
-        datesOfNextTwoWeeks = timetableService.getListOfNextTwoWeeks()
+        datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
         lastIndex = datesOfNextTwoWeeks.size - 1
         lastDate = datesOfNextTwoWeeks.get(lastIndex)
 
@@ -56,7 +56,7 @@ class TimetableServiceTest(@Autowired val timetableService: TimetableService) {
         val participants = listOf(creator)
         var survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
 
-        survey = timetableService.save(survey)
+        survey = surveyService.save(survey)
 
         assertThat(survey.id).isNotNull
         assertThat(survey.participants).hasSizeGreaterThan(0)

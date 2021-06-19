@@ -9,7 +9,7 @@ import java.time.LocalDate.now
 import java.util.stream.Collectors
 
 @Service
-class TimetableService(@Autowired val surveyRepository: SurveyRepository) {
+class SurveyService(@Autowired val surveyRepository: SurveyRepository) {
 
     fun getListOfNextTwoWeeks(): List<LocalDate> {
         val tomorrow = now().plusDays(1)

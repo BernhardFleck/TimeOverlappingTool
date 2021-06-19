@@ -1,6 +1,6 @@
 package at.bernhardfleck.TimeOverlappingTool.presentation
 
-import at.bernhardfleck.TimeOverlappingTool.service.TimetableService
+import at.bernhardfleck.TimeOverlappingTool.service.SurveyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -9,12 +9,12 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 @RequestMapping("/timetable")
-class TimetableController(@Autowired val timetableService: TimetableService) {
+class SurveyController(@Autowired val surveyService: SurveyService) {
 
     @GetMapping("/showNextTwoWeeks")
     fun showSurveyInView(): ModelAndView {
         var modelAndView = ModelAndView()
-        val datesOfNextTwoWeeks = timetableService.getListOfNextTwoWeeks()
+        val datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
 
         modelAndView.viewName = "timetable"
         modelAndView.addObject("dates", datesOfNextTwoWeeks)
