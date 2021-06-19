@@ -66,7 +66,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
     }
 
     @Test
-    fun `ensure that a saved survey consisting of blank names of the creator throws an exception`() {
+    fun `ensure that a submitted survey consisting of blank names of the creator throws an exception`() {
         val firstName = ""
         val lastName = "  "
         val purpose = "SoccerNight"
@@ -84,7 +84,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
     }
 
     @Test
-    fun `ensure that a saved survey consisting of a blank purpose throws an exception`() {
+    fun `ensure that a submitted survey consisting of a blank purpose throws an exception`() {
         val firstName = "John"
         val lastName = "Doe"
         val purpose = "  "
@@ -156,7 +156,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
     }
 
     @Test
-    fun `ensure that a saved survey with no participants throws an exception`() {
+    fun `ensure that a submitted survey with no participants throws an exception`() {
         val purpose = "SoccerNight"
         val minimumParticipantsForMatch = 5
         val startDate = LocalDate.of(2021, 6, 19)
@@ -171,7 +171,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
     }
 
     @Test
-    fun `ensure that a saved survey with no selected dates throws an exception`() {
+    fun `ensure that a submitted survey with no selected dates throws an exception`() {
         val firstName = "John"
         val lastName = "Doe"
         val purpose = "WatchingSoccerTogether"
