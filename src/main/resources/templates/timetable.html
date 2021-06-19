@@ -6,7 +6,22 @@
 </head>
 <body>
 
-<form action="/" method="post">
+<form th:action="@{/}" method="post">
+    <fieldset>
+        <legend>Who are you?</legend>
+        <label>
+            Enter your first name:
+            <input type="text" id="firstNameField" th:name="firstNameField" placeholder="John"/>
+        </label>
+        <label>
+            Enter your last name:
+            <input type="text" id="lastNameField" th:name="lastNameField" placeholder="Doe"/>
+        </label>
+        <label>
+            What is the purpose of the survey?
+            <input type="text" id="purposeField" th:name="purposeField" placeholder="Meet, Greet And Eat"/>
+        </label>
+    </fieldset>
     <table>
         <thead>
         <tr>
