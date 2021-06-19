@@ -3,7 +3,6 @@ package at.bernhardfleck.TimeOverlappingTool.domain
 import lombok.Data
 import org.springframework.data.jpa.domain.AbstractPersistable
 import java.time.LocalDate
-import java.time.LocalDate.now
 import java.util.*
 import javax.persistence.CascadeType.ALL
 import javax.persistence.ElementCollection
@@ -26,9 +25,6 @@ class Survey(
 ) : AbstractPersistable<UUID>() {
 
     fun validate() {
-        val tomorrow = now().plusDays(1)
-
-        if (startDate.isBefore(tomorrow)) throw IllegalArgumentException("purpose must not be blank")
         if (minimumParticipantsForMatch < 2) throw IllegalArgumentException("it needs two people for a match at least")
         purpose.ifBlank { throw IllegalArgumentException("purpose must not be blank") }
         listOfSelectedDates.ifEmpty { throw IllegalArgumentException("creating a survey without selecting dates is pointless") }
