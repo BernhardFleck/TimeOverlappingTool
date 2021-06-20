@@ -1,6 +1,5 @@
 package at.bernhardfleck.TimeOverlappingTool.domain
 
-import lombok.Data
 import org.springframework.data.jpa.domain.AbstractPersistable
 import java.time.LocalDate
 import java.util.*
@@ -10,7 +9,6 @@ import javax.persistence.Entity
 import javax.persistence.ManyToMany
 
 @Entity
-@Data
 class Survey(
     val purpose: String,
     val startDate: LocalDate,
