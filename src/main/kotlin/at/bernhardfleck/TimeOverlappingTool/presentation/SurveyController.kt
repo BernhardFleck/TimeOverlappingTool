@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView
 @RequestMapping("/survey")
 class SurveyController(@Autowired val surveyService: SurveyService) {
 
-    @GetMapping("/show")
+    @GetMapping("/create")
     fun showSurveyInView(): ModelAndView {
         var modelAndView = ModelAndView()
         val datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
