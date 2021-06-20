@@ -6,25 +6,29 @@
 </head>
 <body>
 
-<form th:action="@{/survey/submit}" method="post" th:object="${dto}">
+<form th:action="${intention} eq 'createSurvey' ?
+                @{/survey/submit} :
+                @{/survey/participate/${surveyId}}"
+      method="post" th:object="${dto}">
     <fieldset>
         <legend>Who are you?</legend>
         <label>
             Enter your first name:
-            <input type="text" id="firstNameField" th:field="*{creator.firstName}" placeholder="John/Jane"/>
+            <input type="text" id="firstNameField" th:field="*{participant.firstName}" placeholder="John/Jane"/>
         </label>
         <label>
             Enter your last name:
-            <input type="text" id="lastNameField" th:field="*{creator.lastName}" placeholder="Doe"/>
+            <input type="text" id="lastNameField" th:field="*{participant.lastName}" placeholder="Doe"/>
         </label>
         <label>
             What is the purpose of the survey?
-            <input type="text" id="purposeField" th:field="*{purpose}" placeholder="Meet, Greet And Eat"/>
+            <input type="text" id="purposeField" th:field="*{purpose}" placeholder="Meet, Greet And Eat"
+                   th:disabled="${intention} eq 'participateSurvey'"/>
         </label>
         <label>
             How many participants are needed for a match*?
             <input type="number" id="minimumParticipantsFields" th:field="*{minimumParticipantsForMatch}"
-                   placeholder="2" min="2"/>
+                   placeholder="2" min="2" th:disabled="${intention} eq 'participateSurvey'"/>
         </label>
     </fieldset>
     <table>

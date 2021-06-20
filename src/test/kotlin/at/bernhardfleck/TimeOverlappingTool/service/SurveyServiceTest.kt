@@ -1,6 +1,7 @@
 package at.bernhardfleck.TimeOverlappingTool.service
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
+import at.bernhardfleck.TimeOverlappingTool.domain.Submission
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
@@ -50,13 +51,15 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val minimumParticipantsForMatch = 5
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val listOfSelectedDates = listOf(
+        val selectedDates = listOf(
             LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20),
             LocalDate.of(2021, 6, 25), LocalDate.of(2021, 6, 29)
         )
         val creator = Participant(firstName, lastName)
-        val participants = listOf(creator)
-        var survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+        val participants = mutableListOf(creator)
+        val submission = Submission(creator, selectedDates)
+        val submissions = mutableListOf(submission)
+        var survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
         survey = surveyService.saveAfterValidationOf(survey)
 
@@ -73,10 +76,12 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val minimumParticipantsForMatch = 5
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
         val creator = Participant(firstName, lastName)
-        val participants = listOf(creator)
-        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+        val participants = mutableListOf(creator)
+        val submission = Submission(creator, selectedDates)
+        val submissions = mutableListOf(submission)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
         assertThrows(IllegalArgumentException::class.java) {
             surveyService.saveAfterValidationOf(survey)
@@ -91,10 +96,12 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val minimumParticipantsForMatch = 5
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
         val creator = Participant(firstName, lastName)
-        val participants = listOf(creator)
-        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+        val participants = mutableListOf(creator)
+        val submission = Submission(creator, selectedDates)
+        val submissions = mutableListOf(submission)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
         assertThrows(IllegalArgumentException::class.java) {
             surveyService.saveAfterValidationOf(survey)
@@ -109,10 +116,12 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val minimumParticipantsForMatch = -1
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
         val creator = Participant(firstName, lastName)
-        val participants = listOf(creator)
-        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+        val participants = mutableListOf(creator)
+        val submission = Submission(creator, selectedDates)
+        val submissions = mutableListOf(submission)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
         assertThrows(IllegalArgumentException::class.java) {
             surveyService.saveAfterValidationOf(survey)
@@ -127,10 +136,12 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val minimumParticipantsForMatch = 0
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
         val creator = Participant(firstName, lastName)
-        val participants = listOf(creator)
-        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+        val participants = mutableListOf(creator)
+        val submission = Submission(creator, selectedDates)
+        val submissions = mutableListOf(submission)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
         assertThrows(IllegalArgumentException::class.java) {
             surveyService.saveAfterValidationOf(survey)
@@ -145,10 +156,12 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val minimumParticipantsForMatch = 1
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
         val creator = Participant(firstName, lastName)
-        val participants = listOf(creator)
-        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+        val participants = mutableListOf(creator)
+        val submission = Submission(creator, selectedDates)
+        val submissions = mutableListOf(submission)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
         assertThrows(IllegalArgumentException::class.java) {
             surveyService.saveAfterValidationOf(survey)
@@ -156,14 +169,16 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
     }
 
     @Test
-    fun `ensure that a submitted survey with no participants throws an exception`() {
+    fun `ensure that a submitted survey with no valid participants throws an exception`() {
         val purpose = "SoccerNight"
         val minimumParticipantsForMatch = 5
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val listOfSelectedDates = listOf(LocalDate.of(2021, 6, 20))
-        val participants = emptyList<Participant>()
-        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val participants = mutableListOf<Participant>()
+        val submission = Submission(Participant(), selectedDates)
+        val submissions = mutableListOf(submission)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
         assertThrows(IllegalArgumentException::class.java) {
             surveyService.saveAfterValidationOf(survey)
@@ -178,10 +193,12 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val minimumParticipantsForMatch = 2
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val listOfSelectedDates = emptyList<LocalDate>()
+        val selectedDates = emptyList<LocalDate>()
         val creator = Participant(firstName, lastName)
-        val participants = listOf(creator)
-        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, listOfSelectedDates)
+        val participants = mutableListOf(creator)
+        val submission = Submission(creator, selectedDates)
+        val submissions = mutableListOf(submission)
+        val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
         assertThrows(IllegalArgumentException::class.java) {
             surveyService.saveAfterValidationOf(survey)

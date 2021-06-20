@@ -15,7 +15,7 @@ class SurveyDTO {
 
     var minimumParticipantsForMatch = 2
 
-    var creator: Participant = Participant()
+    var participant: Participant = Participant()
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     var selectedDates: List<LocalDate> = emptyList()

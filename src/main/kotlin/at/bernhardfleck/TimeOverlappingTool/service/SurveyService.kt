@@ -1,5 +1,6 @@
 package at.bernhardfleck.TimeOverlappingTool.service
 
+import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 import at.bernhardfleck.TimeOverlappingTool.persistence.SurveyRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,5 +24,10 @@ class SurveyService(@Autowired val surveyRepository: SurveyRepository) {
     fun saveAfterValidationOf(survey: Survey): Survey {
         survey.validate()
         return surveyRepository.saveAndFlush(survey)
+    }
+
+    fun participation(survey: Survey, participant: Participant): Survey {
+        //TODO
+        return survey
     }
 }

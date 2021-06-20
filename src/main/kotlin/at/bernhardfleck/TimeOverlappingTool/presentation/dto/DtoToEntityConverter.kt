@@ -11,8 +11,8 @@ class DtoToEntityConverter {
                 dto.startDate,
                 dto.endDate,
                 dto.minimumParticipantsForMatch,
-                participants = listOf(dto.creator),
-                dto.selectedDates
+                participants = mutableListOf(),
+                submissions = mutableListOf()
             )
         }
     }
