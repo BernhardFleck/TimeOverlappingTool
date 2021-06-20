@@ -8,10 +8,10 @@ class SurveyDTO {
     var purpose: String = ""
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    var startDate: LocalDate? = null
+    lateinit var startDate: LocalDate
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    var endDate: LocalDate? = null
+    lateinit var endDate: LocalDate
 
     var minimumParticipantsForMatch = 2
 
