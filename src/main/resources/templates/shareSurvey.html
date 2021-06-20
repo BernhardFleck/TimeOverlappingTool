@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Share Survey</title>
+</head>
+<body>
+<p>Hooray - Your survey was created successfully!</p>
+<p>To let others participate in, you can take the following URI and share it with your friends:</p>
+<a th:href="@{'/survey/participate/' + ${surveyId}}" th:text="@{'/survey/participate/' + ${surveyId}}">
+    Sorry, I guess your number was lost during the process. Try it again or contact the owner of the website.
+</a>
+</body>
+</html>
