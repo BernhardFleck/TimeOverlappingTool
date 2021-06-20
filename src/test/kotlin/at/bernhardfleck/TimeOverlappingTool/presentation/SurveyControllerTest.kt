@@ -1,5 +1,6 @@
 package at.bernhardfleck.TimeOverlappingTool.presentation
 
+import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,11 +18,13 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
 
     @Test
     fun `ensure that the list of dates passed to the view is not empty`() {
-        var passedModelAndView: ModelAndView
+        val passedModelAndView: ModelAndView
+        val passedDTO: SurveyDTO
         val passedDates: List<LocalDate>
 
         passedModelAndView = surveyController.showSurveyInView()
-        passedDates = passedModelAndView.model.get("dates") as List<LocalDate>
+        passedDTO = passedModelAndView.model.get("dto") as SurveyDTO
+        passedDates = passedDTO.selectedDates
 
         assertThat(passedDates).isNotEmpty
     }
@@ -29,10 +32,12 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
     @Test
     fun `ensure that the list of dates passed to the view contains 14 dates`() {
         val passedModelAndView: ModelAndView
+        val passedDTO: SurveyDTO
         val passedDates: List<LocalDate>
 
         passedModelAndView = surveyController.showSurveyInView()
-        passedDates = passedModelAndView.model.get("dates") as List<LocalDate>
+        passedDTO = passedModelAndView.model.get("dto") as SurveyDTO
+        passedDates = passedDTO.selectedDates
 
         assertThat(passedDates).hasSize(14)
     }

@@ -6,25 +6,25 @@
 </head>
 <body>
 
-<form th:action="@{/}" method="post">
+<form th:action="@{/survey/submit}" method="post" th:object="${dto}">
     <fieldset>
         <legend>Who are you?</legend>
         <label>
             Enter your first name:
-            <input type="text" id="firstNameField" th:name="firstNameField" placeholder="John"/>
+            <input type="text" id="firstNameField" th:field="*{creator.firstName}" placeholder="John/Jane"/>
         </label>
         <label>
             Enter your last name:
-            <input type="text" id="lastNameField" th:name="lastNameField" placeholder="Doe"/>
+            <input type="text" id="lastNameField" th:field="*{creator.lastName}" placeholder="Doe"/>
         </label>
         <label>
             What is the purpose of the survey?
-            <input type="text" id="purposeField" th:name="purposeField" placeholder="Meet, Greet And Eat"/>
+            <input type="text" id="purposeField" th:field="*{purpose}" placeholder="Meet, Greet And Eat"/>
         </label>
         <label>
             How many participants are needed for a match*?
-            <input type="number" id="minimumParticipantsFields" th:name="minimumParticipantsFields" placeholder="2"
-                   min="2"/>
+            <input type="number" id="minimumParticipantsFields" th:field="*{minimumParticipantsForMatch}"
+                   placeholder="2" min="2"/>
         </label>
     </fieldset>
     <table>
@@ -34,12 +34,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="date, status : ${dates}">
+        <tr th:each="date, status : *{selectedDates}">
             <td>
                 <label>
                     <span th:text="${date}"></span>
-                    <input type="checkbox" th:id="date + ${status.index}" th:name="date + ${status.index}"
-                           th:value="${date}"/>
+                    <input type="checkbox" th:name="selectedDates" th:value="${date}" th:id="date + ${status.index}"/>
+
+                    <input th:if="${status.first}" type="hidden" th:name="startDate" th:value="${date}"/>
+                    <input th:if="${status.last}" type="hidden" th:name="endDate" th:value="${date}"/>
                 </label>
             </td>
         </tr>
@@ -48,7 +50,8 @@
     <label>
         You cannot change your submission afterwards, so better be sure that you selected the right dates.
         <br/>
-        If no date suits you, then you should still submit the survey to show your friends that you have seen the invitation but you cannot participate.
+        If no date suits you, then you should still submit the survey to show your friends that you have seen the
+        invitation but you cannot participate.
         <br/>
         <input type="submit" id="submitButton" value="Submit"/>
     </label>
