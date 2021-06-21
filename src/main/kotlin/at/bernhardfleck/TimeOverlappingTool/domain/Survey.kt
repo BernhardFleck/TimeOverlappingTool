@@ -1,5 +1,7 @@
 package at.bernhardfleck.TimeOverlappingTool.domain
 
+import org.hibernate.annotations.LazyCollection
+import org.hibernate.annotations.LazyCollectionOption
 import org.springframework.data.jpa.domain.AbstractPersistable
 import java.time.LocalDate
 import java.util.*
@@ -15,9 +17,11 @@ class Survey(
     val endDate: LocalDate,
     val minimumParticipantsForMatch: Int,
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = [ALL])
     val participants: MutableList<Participant>,
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = [ALL])
     val submissions: MutableList<Submission>
 
