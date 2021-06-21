@@ -12,7 +12,7 @@ import java.util.stream.Collectors
 @Service
 class SurveyService(@Autowired val surveyRepository: SurveyRepository) {
 
-    fun getListOfNextTwoWeeks(): List<LocalDate> {
+    fun getNextTwoWeeks(): List<LocalDate> {
         val tomorrow = now().plusDays(1)
         val fourteenDaysLater = tomorrow.plusDays(14)
 

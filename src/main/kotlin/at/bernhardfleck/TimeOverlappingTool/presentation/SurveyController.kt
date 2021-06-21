@@ -12,13 +12,13 @@ import java.util.*
 
 @Controller
 @RequestMapping("/survey")
-class SurveyController(@Autowired val surveyService: SurveyService) {
+class SurveyController(@Autowired val service: SurveyService) {
 
     @GetMapping("/create")
     fun showSurveyInView(): ModelAndView {
         val modelAndView = ModelAndView()
         val surveyDTO = SurveyDTO()
-        val datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
+        val datesOfNextTwoWeeks = service.getNextTwoWeeks()
 
         surveyDTO.selectedDates = datesOfNextTwoWeeks
         modelAndView.viewName = "survey"

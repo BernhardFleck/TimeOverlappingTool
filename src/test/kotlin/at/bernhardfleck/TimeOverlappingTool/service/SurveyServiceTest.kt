@@ -22,7 +22,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val datesOfNextTwoWeeks: List<LocalDate>
         val firstDate: LocalDate
 
-        datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
+        datesOfNextTwoWeeks = surveyService.getNextTwoWeeks()
         firstDate = datesOfNextTwoWeeks.get(0)
 
         assertThat(firstDate).isEqualTo(tomorrow)
@@ -36,7 +36,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val lastDate: LocalDate
         val lastIndex: Int
 
-        datesOfNextTwoWeeks = surveyService.getListOfNextTwoWeeks()
+        datesOfNextTwoWeeks = surveyService.getNextTwoWeeks()
         lastIndex = datesOfNextTwoWeeks.size - 1
         lastDate = datesOfNextTwoWeeks.get(lastIndex)
 
