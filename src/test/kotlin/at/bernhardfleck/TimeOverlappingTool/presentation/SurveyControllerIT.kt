@@ -5,7 +5,6 @@ import at.bernhardfleck.TimeOverlappingTool.domain.Submission
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 import at.bernhardfleck.TimeOverlappingTool.persistence.SurveyRepository
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,10 +22,10 @@ class SurveyControllerIT(
     @Test
     fun `ensure that a saved survey contains the creator of it`() {
         val modelAndView: ModelAndView
-        val expectedSurveyId: UUID
+        val surveyId: UUID
         val survey: Survey
-        val expectedSubmission: Submission
-        val expectedCreator: Participant
+        val submission: Submission
+        val creator: Participant
         val surveyDTO = SurveyDTO()
         surveyDTO.purpose = "SoccerNight"
         surveyDTO.minimumParticipantsForMatch = 5
@@ -36,15 +35,15 @@ class SurveyControllerIT(
         surveyDTO.participant = Participant("John", "Doe")
 
         modelAndView = surveyController.submitSurvey(surveyDTO)
-        expectedSurveyId = modelAndView.model.get("surveyId") as UUID
-        survey = surveyRepository.getById(expectedSurveyId)
-        expectedSubmission = survey.submissions.first()
-        expectedCreator = expectedSubmission.participant
+        surveyId = modelAndView.model.get("surveyId") as UUID
+        survey = surveyRepository.getById(surveyId)
+        submission = survey.submissions.first()
+        creator = submission.participant
 
-        assertThat(expectedCreator.firstName).isEqualTo("John")
-        assertThat(expectedCreator.lastName).isEqualTo("Doe")
+        assertThat(creator.firstName).isEqualTo("John")
+        assertThat(creator.lastName).isEqualTo("Doe")
     }
-    
+
     @Test
     fun `ensure that a saved survey contains the selected dates`() {
         val modelAndView: ModelAndView
