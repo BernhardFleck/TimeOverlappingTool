@@ -1,7 +1,6 @@
 package at.bernhardfleck.TimeOverlappingTool.presentation
 
-import at.bernhardfleck.TimeOverlappingTool.domain.Submission
-import at.bernhardfleck.TimeOverlappingTool.presentation.dto.DtoToEntityConverter.mapper.convert
+import at.bernhardfleck.TimeOverlappingTool.presentation.dto.DtoToEntityConverter.Converter.convert
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import at.bernhardfleck.TimeOverlappingTool.service.SurveyService
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,14 +32,12 @@ class SurveyController(@Autowired val service: SurveyService) {
         //TODO add bindingresult check and what about returning responseEntities?
         val modelAndView = ModelAndView()
         var survey = convert(surveyDTO)
-        var participants = survey.participants
-        val participant = surveyDTO.participant
-        var submissions = survey.submissions
-        var submission = Submission(participant, surveyDTO.selectedDates)
-//TODO move logic into the service
-        participants.add(participant)
-        submissions.add(submission)
-        survey = surveyService.saveAfterValidationOf(survey)
+        var submission = service.getSubmissionFrom(surveyDTO)
+        var participant = service.getParticipantFrom(surveyDTO)
+
+        service.add(submission, survey)
+        service.add(participant, survey)
+        survey = service.saveAfterValidationOf(survey)
 
         modelAndView.viewName = "shareSurvey"
         modelAndView.addObject("surveyId", survey.id)

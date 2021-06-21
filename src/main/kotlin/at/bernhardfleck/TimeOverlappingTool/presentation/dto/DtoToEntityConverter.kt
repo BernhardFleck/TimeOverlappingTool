@@ -4,7 +4,7 @@ import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 
 class DtoToEntityConverter {
 
-    companion object mapper {
+    companion object Converter {
         fun convert(dto: SurveyDTO): Survey {
             return Survey(
                 dto.purpose,
