@@ -7,22 +7,10 @@ import at.bernhardfleck.TimeOverlappingTool.persistence.SurveyRepository
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.time.LocalDate
-import java.time.LocalDate.now
 import java.util.*
-import java.util.stream.Collectors
 
 @Service
 class SurveyService(@Autowired private val surveyRepository: SurveyRepository) {
-
-    fun getNextTwoWeeks(): List<LocalDate> {
-        val tomorrow = now().plusDays(1)
-        val fourteenDaysLater = tomorrow.plusDays(14)
-
-        return tomorrow
-            .datesUntil(fourteenDaysLater)
-            .collect(Collectors.toList())
-    }
 
     fun getSubmissionFrom(surveyDTO: SurveyDTO): Submission {
         return Submission(

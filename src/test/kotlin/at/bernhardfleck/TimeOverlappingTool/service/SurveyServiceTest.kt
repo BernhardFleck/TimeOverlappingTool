@@ -3,6 +3,7 @@ package at.bernhardfleck.TimeOverlappingTool.service
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.domain.Submission
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
+import at.bernhardfleck.TimeOverlappingTool.presentation.helper.DatesCreator.Companion.getNextTwoWeeks
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,7 +22,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val datesOfNextTwoWeeks: List<LocalDate>
         val firstDate: LocalDate
 
-        datesOfNextTwoWeeks = surveyService.getNextTwoWeeks()
+        datesOfNextTwoWeeks = getNextTwoWeeks()
         firstDate = datesOfNextTwoWeeks.get(0)
 
         assertThat(firstDate).isEqualTo(tomorrow)
@@ -35,7 +36,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val lastDate: LocalDate
         val lastIndex: Int
 
-        datesOfNextTwoWeeks = surveyService.getNextTwoWeeks()
+        datesOfNextTwoWeeks = getNextTwoWeeks()
         lastIndex = datesOfNextTwoWeeks.size - 1
         lastDate = datesOfNextTwoWeeks.get(lastIndex)
 

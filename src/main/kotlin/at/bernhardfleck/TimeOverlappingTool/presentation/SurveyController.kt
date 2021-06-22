@@ -1,7 +1,8 @@
 package at.bernhardfleck.TimeOverlappingTool.presentation
 
-import at.bernhardfleck.TimeOverlappingTool.presentation.dto.DtoToEntityConverter.Converter.convert
+import at.bernhardfleck.TimeOverlappingTool.presentation.dto.DtoToEntityConverter.Companion.convert
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
+import at.bernhardfleck.TimeOverlappingTool.presentation.helper.DatesCreator.Companion.getNextTwoWeeks
 import at.bernhardfleck.TimeOverlappingTool.service.SurveyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -18,7 +19,7 @@ class SurveyController(@Autowired val service: SurveyService) {
     fun showSurveyInView(): ModelAndView {
         val modelAndView = ModelAndView()
         val surveyDTO = SurveyDTO()
-        val datesOfNextTwoWeeks = service.getNextTwoWeeks()
+        val datesOfNextTwoWeeks = getNextTwoWeeks()
 
         surveyDTO.selectedDates = datesOfNextTwoWeeks
         modelAndView.viewName = "survey"
