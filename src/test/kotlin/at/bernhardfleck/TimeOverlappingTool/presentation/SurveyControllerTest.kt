@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.web.servlet.ModelAndView
+import org.springframework.web.servlet.view.RedirectView
 import java.time.LocalDate
 import java.util.*
 
@@ -174,14 +175,15 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             participant = Participant("Jane", "Doe"),
             selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
         )
-        var modelAndView = surveyController.createSurvey(dtoFromCreator)
+        val modelAndView = surveyController.createSurvey(dtoFromCreator)
         val surveyId = modelAndView.model.get("surveyId") as UUID
         val surveyIdString = surveyId.toString()
+        val redirectView: RedirectView
 
-        modelAndView = surveyController.participateInSurvey(dtoFromParticipant, surveyIdString)
-        expectedForwardingPage = modelAndView.viewName!!
+        redirectView = surveyController.participateInSurvey(dtoFromParticipant, surveyIdString)
+        expectedForwardingPage = redirectView.url!!
 
-        assertThat(expectedForwardingPage).isEqualTo("result")
+        assertThat(expectedForwardingPage).contains("result")
     }
 
 }

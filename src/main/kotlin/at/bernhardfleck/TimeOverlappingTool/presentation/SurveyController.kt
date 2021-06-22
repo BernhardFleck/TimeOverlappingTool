@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
+import org.springframework.web.servlet.view.RedirectView
 import java.util.*
 
 @Controller
@@ -60,16 +61,16 @@ class SurveyController(@Autowired val service: SurveyService) {
     fun participateInSurvey(
         @ModelAttribute surveyDTO: SurveyDTO,
         @PathVariable surveyId: String
-    ): ModelAndView {
+    ): RedirectView {
         val surveyId = UUID.fromString(surveyId)
-        val modelAndView = ModelAndView()
         val submission = service.getSubmissionFrom(surveyDTO)
         val survey = service.getSurveyBy(surveyId)
+        val resultPageUrl = "/survey/result/$surveyId"
 
         submission.validate()
         service.participation(survey, submission)
-        modelAndView.viewName = "result"
-        return modelAndView
+
+        return RedirectView(resultPageUrl)
     }
 
 }
