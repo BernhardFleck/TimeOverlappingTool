@@ -155,6 +155,33 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         assertThat(surveyDTO.selectedDates.maxOrNull()).isEqualTo(LocalDate.of(2021, 7, 2))
     }
 
+    @Test
+    fun `ensure participating in a survey successfully, redirects to the result page`() {
+        val expectedForwardingPage: String
+        val dtoFromCreator = SurveyDTO(
+            purpose = "SoccerNight",
+            minimumParticipantsForMatch = 5,
+            startDate = LocalDate.of(2021, 6, 19),
+            endDate = LocalDate.of(2021, 7, 2),
+            participant = Participant("John", "Doe"),
+            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+        )
+        val dtoFromParticipant = SurveyDTO(
+            purpose = "SoccerNight",
+            minimumParticipantsForMatch = 5,
+            startDate = LocalDate.of(2021, 6, 19),
+            endDate = LocalDate.of(2021, 7, 2),
+            participant = Participant("Jane", "Doe"),
+            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+        )
+        var modelAndView = surveyController.createSurvey(dtoFromCreator)
+        val surveyId = modelAndView.model.get("surveyId") as UUID
+        val surveyIdString = surveyId.toString()
 
+        modelAndView = surveyController.participateInSurvey(dtoFromParticipant, surveyIdString)
+        expectedForwardingPage = modelAndView.viewName!!
+
+        assertThat(expectedForwardingPage).isEqualTo("result")
+    }
 
 }
