@@ -8,7 +8,7 @@
 
 <form th:action="${intention} eq 'createSurvey' ?
                 @{/survey/create} :
-                @{/survey/participate/${surveyId}}"
+                @{ '/survey/participate/' + ${surveyId}}"
       method="post" th:object="${dto}">
     <fieldset>
         <legend>Who are you?</legend>
