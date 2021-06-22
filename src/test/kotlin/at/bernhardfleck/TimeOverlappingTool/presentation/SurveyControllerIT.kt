@@ -34,7 +34,7 @@ class SurveyControllerIT(
         surveyDTO.selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
         surveyDTO.participant = Participant("John", "Doe")
 
-        modelAndView = surveyController.submitSurvey(surveyDTO)
+        modelAndView = surveyController.createSurvey(surveyDTO)
         surveyId = modelAndView.model.get("surveyId") as UUID
         survey = surveyRepository.getById(surveyId)
         submission = survey.submissions.first()
@@ -59,7 +59,7 @@ class SurveyControllerIT(
         surveyDTO.selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
         surveyDTO.participant = Participant("John", "Doe")
 
-        modelAndView = surveyController.submitSurvey(surveyDTO)
+        modelAndView = surveyController.createSurvey(surveyDTO)
         surveyId = modelAndView.model.get("surveyId") as UUID
         survey = surveyRepository.getById(surveyId)
         submission = survey.submissions.first()

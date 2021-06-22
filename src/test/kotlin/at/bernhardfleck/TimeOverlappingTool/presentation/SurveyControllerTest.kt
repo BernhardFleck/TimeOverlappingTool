@@ -57,7 +57,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
         )
 
-        modelAndView = surveyController.submitSurvey(surveyDTO)
+        modelAndView = surveyController.createSurvey(surveyDTO)
         expectedSurveyId = modelAndView.model.get("surveyId") as UUID
 
         assertThat(expectedSurveyId).isNotNull
@@ -73,7 +73,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             participant = Participant("John", "Doe"),
             selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
         )
-        var modelAndView = surveyController.submitSurvey(surveyDTO)
+        var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
 
         modelAndView = surveyController.showSurveyWithDetailsInView(surveyId)
@@ -93,7 +93,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             participant = Participant("John", "Doe"),
             selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
         )
-        var modelAndView = surveyController.submitSurvey(surveyDTO)
+        var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
 
         modelAndView = surveyController.showSurveyWithDetailsInView(surveyId)
@@ -127,7 +127,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             participant = Participant("John", "Doe"),
             selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
         )
-        var modelAndView = surveyController.submitSurvey(surveyDTO)
+        var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
 
         modelAndView = surveyController.showSurveyWithDetailsInView(surveyId)
@@ -146,7 +146,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             participant = Participant("John", "Doe"),
             selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
         )
-        var modelAndView = surveyController.submitSurvey(surveyDTO)
+        var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
 
         modelAndView = surveyController.showSurveyWithDetailsInView(surveyId)
@@ -154,5 +154,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
 
         assertThat(surveyDTO.selectedDates.maxOrNull()).isEqualTo(LocalDate.of(2021, 7, 2))
     }
+
+
 
 }

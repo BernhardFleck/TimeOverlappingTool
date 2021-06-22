@@ -27,8 +27,8 @@ class SurveyController(@Autowired val service: SurveyService) {
         return modelAndView
     }
 
-    @PostMapping("/submit")
-    fun submitSurvey(@ModelAttribute surveyDTO: SurveyDTO): ModelAndView {
+    @PostMapping("/create")
+    fun createSurvey(@ModelAttribute surveyDTO: SurveyDTO): ModelAndView {
         //TODO add bindingresult check and what about returning responseEntities?
         val modelAndView = ModelAndView()
         var survey = convert(surveyDTO)

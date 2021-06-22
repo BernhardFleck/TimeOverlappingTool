@@ -7,7 +7,7 @@
 <body>
 
 <form th:action="${intention} eq 'createSurvey' ?
-                @{/survey/submit} :
+                @{/survey/create} :
                 @{/survey/participate/${surveyId}}"
       method="post" th:object="${dto}">
     <fieldset>
