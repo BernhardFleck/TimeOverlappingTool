@@ -4,7 +4,6 @@ import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.domain.Submission
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 import at.bernhardfleck.TimeOverlappingTool.persistence.SurveyRepository
-import at.bernhardfleck.TimeOverlappingTool.presentation.dto.DtoToEntityConverter.Converter.convert
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -50,8 +49,13 @@ class SurveyService(@Autowired val surveyRepository: SurveyRepository) {
         return surveyRepository.saveAndFlush(survey)
     }
 
-    fun participation(survey: Survey, participant: Participant): Survey {
-        //TODO
-        return survey
+    fun participation(survey: Survey, submission: Submission): Survey {
+        val participant = submission.participant
+
+        add(submission, survey)
+        add(participant, survey)
+
+        submission.validate()
+        return surveyRepository.saveAndFlush(survey)
     }
 }

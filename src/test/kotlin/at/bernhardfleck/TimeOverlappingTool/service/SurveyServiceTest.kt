@@ -204,4 +204,49 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
             surveyService.saveAfterValidationOf(survey)
         }
     }
+
+    @Test
+    fun `ensure that participating in a survey adds a new participant`() {
+        val purpose = "SoccerNight"
+        val minimumParticipantsForMatch = 5
+        val startDate = LocalDate.of(2021, 6, 19)
+        val endDate = LocalDate.of(2021, 7, 3)
+        val creator = Participant("John", "Doe")
+        val creatorsSelectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+        val creatorsSubmission = Submission(creator, creatorsSelectedDates)
+        val participants = mutableListOf(creator)
+        val submissions = mutableListOf(creatorsSubmission)
+        var survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
+        val participant = Participant("Jane", "Doe")
+        val participantsSelectedDates = listOf(LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+        val participantsSubmission = Submission(participant, participantsSelectedDates)
+
+        survey = surveyService.saveAfterValidationOf(survey)
+        survey = surveyService.participation(survey, participantsSubmission)
+
+        assertThat(survey.submissions).hasSize(2)
+    }
+
+    @Test
+    fun `ensure that participating in a survey adds a new submission`() {
+        val purpose = "SoccerNight"
+        val minimumParticipantsForMatch = 5
+        val startDate = LocalDate.of(2021, 6, 19)
+        val endDate = LocalDate.of(2021, 7, 3)
+        val creator = Participant("John", "Doe")
+        val creatorsSelectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+        val creatorsSubmission = Submission(creator, creatorsSelectedDates)
+        val participants = mutableListOf(creator)
+        val submissions = mutableListOf(creatorsSubmission)
+        var survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
+        val participant = Participant("Jane", "Doe")
+        val participantsSelectedDates = listOf(LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+        val participantsSubmission = Submission(participant, participantsSelectedDates)
+
+        survey = surveyService.saveAfterValidationOf(survey)
+        survey = surveyService.participation(survey, participantsSubmission)
+
+        assertThat(survey.submissions).hasSize(2)
+    }
+
 }
