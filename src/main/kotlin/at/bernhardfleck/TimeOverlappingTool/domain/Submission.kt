@@ -18,4 +18,8 @@ class Submission(
     @ElementCollection
     var selectedDates: List<LocalDate>
 
-) : AbstractPersistable<UUID>()
+) : AbstractPersistable<UUID>() {
+
+    fun validate() = participant.validate()
+
+}
