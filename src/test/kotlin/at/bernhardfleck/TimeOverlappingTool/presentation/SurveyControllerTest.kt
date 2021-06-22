@@ -48,13 +48,14 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
     fun `ensure saving a survey returns a modelAndView containing a surveyId `() {
         val modelAndView: ModelAndView
         val expectedSurveyId: UUID
-        val surveyDTO = SurveyDTO()
-        surveyDTO.purpose = "SoccerNight"
-        surveyDTO.minimumParticipantsForMatch = 5
-        surveyDTO.startDate = LocalDate.of(2021, 6, 19)
-        surveyDTO.endDate = LocalDate.of(2021, 7, 3)
-        surveyDTO.selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
-        surveyDTO.participant = Participant("John", "Doe")
+        val surveyDTO = SurveyDTO(
+            purpose = "SoccerNight",
+            minimumParticipantsForMatch = 5,
+            startDate = LocalDate.of(2021, 6, 19),
+            endDate = LocalDate.of(2021, 7, 2),
+            participant = Participant("John", "Doe"),
+            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+        )
 
         modelAndView = surveyController.submitSurvey(surveyDTO)
         expectedSurveyId = modelAndView.model.get("surveyId") as UUID
