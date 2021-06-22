@@ -31,10 +31,6 @@ class SurveyService(@Autowired private val surveyRepository: SurveyRepository) {
         )
     }
 
-    fun getParticipantFrom(surveyDTO: SurveyDTO): Participant {
-        return surveyDTO.participant
-    }
-
     fun add(submission: Submission, survey: Survey) {
         val submissions = survey.submissions
         submissions.add(submission)
@@ -45,18 +41,15 @@ class SurveyService(@Autowired private val surveyRepository: SurveyRepository) {
         participants.add(participant)
     }
 
-    fun saveAfterValidationOf(survey: Survey): Survey {
-        survey.validate()
-        return surveyRepository.saveAndFlush(survey)
-    }
-
     fun participation(survey: Survey, submission: Submission): Survey {
         val participant = submission.participant
 
         add(submission, survey)
         add(participant, survey)
+        return save(survey)
+    }
 
-        submission.validate()
+    fun save(survey: Survey): Survey {
         return surveyRepository.saveAndFlush(survey)
     }
 

@@ -23,25 +23,22 @@ class SurveyController(@Autowired val service: SurveyService) {
         modelAndView.viewName = "survey"
         modelAndView.addObject("dto", surveyDTO)
         modelAndView.addObject("intention", "createSurvey")
-
         return modelAndView
     }
 
+    //TODO add bindingresult check and what about returning responseEntities?
     @PostMapping("/create")
     fun createSurvey(@ModelAttribute surveyDTO: SurveyDTO): ModelAndView {
-        //TODO add bindingresult check and what about returning responseEntities?
         val modelAndView = ModelAndView()
+        val submission = service.getSubmissionFrom(surveyDTO)
         var survey = convert(surveyDTO)
-        var submission = service.getSubmissionFrom(surveyDTO)
-        var participant = service.getParticipantFrom(surveyDTO)
 
-        service.add(submission, survey)
-        service.add(participant, survey)
-        survey = service.saveAfterValidationOf(survey)
+        survey = service.participation(survey, submission)
+        survey.validate()
+        survey = service.save(survey)
 
         modelAndView.viewName = "shareSurvey"
         modelAndView.addObject("surveyId", survey.id)
-
         return modelAndView
     }
 
@@ -55,7 +52,6 @@ class SurveyController(@Autowired val service: SurveyService) {
         modelAndView.viewName = "survey"
         modelAndView.addObject("dto", surveyDTO)
         modelAndView.addObject("intention", "participateSurvey")
-
         return modelAndView
     }
 
@@ -70,8 +66,8 @@ class SurveyController(@Autowired val service: SurveyService) {
         val submission = service.getSubmissionFrom(surveyDTO)
         val survey = service.getSurveyBy(surveyId)
 
+        submission.validate()
         service.participation(survey, submission)
-
         modelAndView.viewName = "result"
         return modelAndView
     }
