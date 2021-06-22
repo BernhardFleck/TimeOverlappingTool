@@ -20,4 +20,21 @@ class SurveyDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     var selectedDates: List<LocalDate> = emptyList()
 
+    constructor()
+
+    constructor(
+        purpose: String,
+        startDate: LocalDate,
+        endDate: LocalDate,
+        minimumParticipantsForMatch: Int,
+        participant: Participant,
+        selectedDates: List<LocalDate>
+    ) {
+        this.purpose = purpose
+        this.startDate = startDate
+        this.endDate = endDate
+        this.minimumParticipantsForMatch = minimumParticipantsForMatch
+        this.participant = participant
+        this.selectedDates = selectedDates
+    }
 }
