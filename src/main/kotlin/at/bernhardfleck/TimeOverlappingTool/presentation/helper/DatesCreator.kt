@@ -2,13 +2,14 @@ package at.bernhardfleck.TimeOverlappingTool.presentation.helper
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 import java.time.LocalDate
+import java.time.LocalDate.now
 import java.util.stream.Collectors
 
 class DatesCreator {
 
     companion object {
         fun getNextTwoWeeks(): List<LocalDate> {
-            val tomorrow = LocalDate.now().plusDays(1)
+            val tomorrow = now().plusDays(1)
             val fourteenDaysLater = tomorrow.plusDays(14)
 
             return tomorrow
