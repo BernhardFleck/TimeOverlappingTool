@@ -47,8 +47,18 @@ class SurveyController(@Autowired val service: SurveyService) {
 
     @GetMapping("/participate/{surveyId}")
     @ResponseBody
-    fun participateSurvey(@PathVariable surveyId: UUID): String {
-        return surveyId.toString()
+    fun showSurveyWithDetailsInView(@PathVariable surveyId: UUID): ModelAndView {
+        val modelAndView = ModelAndView()
+        val survey = service.getSurveyBy(surveyId)
+        val surveyDTO = convert(survey)
+
+        modelAndView.viewName = "survey"
+        modelAndView.addObject("dto", surveyDTO)
+        modelAndView.addObject("intention", "participateSurvey")
+
+        return modelAndView
+    }
+
     }
 
 }

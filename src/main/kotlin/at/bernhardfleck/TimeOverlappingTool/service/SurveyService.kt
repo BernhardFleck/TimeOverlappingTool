@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.LocalDate.now
+import java.util.*
 import java.util.stream.Collectors
 
 @Service
-class SurveyService(@Autowired val surveyRepository: SurveyRepository) {
+class SurveyService(@Autowired private val surveyRepository: SurveyRepository) {
 
     fun getNextTwoWeeks(): List<LocalDate> {
         val tomorrow = now().plusDays(1)
@@ -57,5 +58,10 @@ class SurveyService(@Autowired val surveyRepository: SurveyRepository) {
 
         submission.validate()
         return surveyRepository.saveAndFlush(survey)
+    }
+
+    fun getSurveyBy(surveyId: UUID): Survey {
+        return surveyRepository.findById(surveyId)
+            .orElseThrow { IllegalArgumentException("Survey could not be loaded. It is either finished or did not exist") }
     }
 }
