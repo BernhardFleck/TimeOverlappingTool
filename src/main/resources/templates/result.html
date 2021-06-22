@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Result</title>
 </head>
-<body>
-<h1>Woho you made it!</h1>
+<body th:object="${survey}">
+<h1>Result Of The Survey:</h1>
+<hr/>
+<div>
+    Purpose:
+    <span th:text="*{purpose}">undefined</span>
+</div>
+<div>
+    Minimum participants needed for a match*:
+    <span th:text="*{minimumParticipantsForMatch}">undefined</span>
+</div>
+<div>
+    People who already participated in this survey:
+    <ul th:each="submission : *{submissions}">
+        <li th:text="${submission.participant.firstName + ' ' + submission.participant.lastName}"> undefined</li>
+        <ul th:each="date : ${submission.selectedDates}">
+            <li th:text="${date}"> undefined</li>
+        </ul>
+    </ul>
+</div>
+
+<p>
+    <sup>*</sup>A match is considered as an overlapping of the required participants on a certain date to be able to
+    start the event
+</p>
 </body>
 </html>
