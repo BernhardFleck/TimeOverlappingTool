@@ -1,9 +1,11 @@
 package at.bernhardfleck.TimeOverlappingTool.presentation.helper
 
+import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 import java.time.LocalDate
 import java.time.LocalDate.now
 import java.util.stream.Collectors
+import java.util.stream.Collectors.toList
 
 class DatesCreator {
 
@@ -23,7 +25,13 @@ class DatesCreator {
             val endInclusive = end.plusDays(1)
 
             return start.datesUntil(endInclusive)
-                .collect(Collectors.toList())
+                .collect(toList())
+        }
+
+        fun emptyParticipantsMappedToDatesOf(survey: Survey): Map<LocalDate, MutableList<Participant>> {
+            return datesFromStartToEndOf(survey)
+                .map { it to mutableListOf<Participant>() }
+                .toMap()
         }
     }
 }

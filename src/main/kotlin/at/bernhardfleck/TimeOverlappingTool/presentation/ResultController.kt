@@ -1,5 +1,6 @@
 package at.bernhardfleck.TimeOverlappingTool.presentation
 
+import at.bernhardfleck.TimeOverlappingTool.service.ResultService
 import at.bernhardfleck.TimeOverlappingTool.service.SurveyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -9,17 +10,22 @@ import org.springframework.web.servlet.ModelAndView
 import java.util.*
 
 @Controller
-class ResultController(@Autowired val surveyService: SurveyService) {
+class ResultController(
+    @Autowired val surveyService: SurveyService,
+    @Autowired val resultService: ResultService,
+) {
 
     @GetMapping("/survey/result/{surveyId}")
     fun showResultViewBy(@PathVariable surveyId: String): ModelAndView {
-        val surveyId = UUID.fromString(surveyId)
         val modelAndView = ModelAndView()
+        val surveyId = UUID.fromString(surveyId)
         val survey = surveyService.getSurveyBy(surveyId)
-
+        val datesMappedToParticipants = resultService.getDatesMappedToParticipantsOf(survey)
 
         modelAndView.viewName = "result"
-        modelAndView.addObject(survey)
+        modelAndView.addObject("survey", survey)
+        modelAndView.addObject("allDates", datesMappedToParticipants)
         return modelAndView
     }
+
 }

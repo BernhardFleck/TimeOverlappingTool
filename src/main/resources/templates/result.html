@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <title>Result</title>
 </head>
-<body th:object="${survey}">
-<h1>Result Of The Survey:</h1>
-<hr/>
-<div>
-    Purpose:
-    <span th:text="*{purpose}">undefined</span>
-</div>
-<div>
-    Minimum participants needed for a match*:
-    <span th:text="*{minimumParticipantsForMatch}">undefined</span>
-</div>
-<div>
-    People who already participated in this survey:
-    <ul th:each="submission : *{submissions}">
-        <li th:text="${submission.participant.firstName + ' ' + submission.participant.lastName}"> undefined</li>
-        <ul th:each="date : ${submission.selectedDates}">
-            <li th:text="${date}"> undefined</li>
+<body>
+<div th:object="${survey}">
+    <h1>Result Of The Survey:</h1>
+    <hr/>
+    <div>
+        Purpose:
+        <span th:text="*{purpose}">undefined</span>
+    </div>
+    <div>
+        Minimum participants needed for a match*:
+        <span th:text="*{minimumParticipantsForMatch}">undefined</span>
+    </div>
+    <div>
+        People who already participated in this survey:
+        <ul th:each="entry : ${allDates}">
+            <li>
+                <span th:text="${entry.key}">Date</span>
+                <ul th:each="participant : ${entry.value}">
+                    <li th:text="${participant.firstName + ' ' + participant.lastName}">Participant</li>
+                </ul>
+            </li>
         </ul>
-    </ul>
+    </div>
 </div>
 
 <p>
