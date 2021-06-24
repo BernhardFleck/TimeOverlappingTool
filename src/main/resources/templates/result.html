@@ -21,9 +21,9 @@
         People who already participated in this survey:
         <ul th:each="entry : ${allDates}">
             <li>
-                <span th:text="${entry.key + ':'}">Date</span>&nbsp;
-                <span th:text="${#lists.size(entry.value) + ' participant(s)'}">0 participants</span>
-                <span th:class="${#lists.size(entry.value) >= survey.minimumParticipantsForMatch} ? 'green' : 'red'">&bull;</span>
+                <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
+                <span th:text="${'#' #lists.size(entry.value)}">#0</span>
+                <span th:class="${ #lists.size(entry.value) >= survey.minimumParticipantsForMatch} ? 'green' : 'red'">&bull;</span>
                 <ul th:each="participant : ${entry.value}">
                     <li th:text="${participant.firstName + ' ' + participant.lastName}">Participant</li>
                 </ul>
