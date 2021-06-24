@@ -18,7 +18,7 @@ class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyCont
     override fun run(vararg args: String?) {
         val dtoForCreation = SurveyDTO(
             purpose = "SoccerNight",
-            minimumParticipantsForMatch = 5,
+            minimumParticipantsForMatch = 2,
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("Jane", "Doe"),
@@ -26,7 +26,7 @@ class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyCont
         )
         val dtoForParticipation = SurveyDTO(
             purpose = "SoccerNight",
-            minimumParticipantsForMatch = 5,
+            minimumParticipantsForMatch = 2,
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("John", "Doe"),
