@@ -45,4 +45,8 @@ class SurveyService(@Autowired private val surveyRepository: SurveyRepository) {
         return surveyRepository.findById(surveyId)
             .orElseThrow { IllegalArgumentException("Survey could not be loaded. It is either finished or did not exist") }
     }
+
+    fun delete(survey: Survey) {
+        surveyRepository.delete(survey)
+    }
 }
