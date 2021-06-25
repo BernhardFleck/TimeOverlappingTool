@@ -5,7 +5,7 @@ import java.util.*
 import javax.persistence.Entity
 
 @Entity
-class Participant(
+data class Participant(
     var firstName: String = "",
     var lastName: String = ""
 ) : AbstractPersistable<UUID>() {

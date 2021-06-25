@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany
 import javax.persistence.OneToMany
 
 @Entity
-class Survey(
+data class Survey(
     val purpose: String,
     val startDate: LocalDate,
     val endDate: LocalDate,

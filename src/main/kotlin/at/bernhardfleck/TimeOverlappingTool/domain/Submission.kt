@@ -10,7 +10,7 @@ import javax.persistence.Entity
 import javax.persistence.OneToOne
 
 @Entity
-class Submission(
+data class Submission(
     @OneToOne
     var participant: Participant,
 
