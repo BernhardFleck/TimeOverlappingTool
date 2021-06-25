@@ -6,11 +6,13 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.web.servlet.ModelAndView
 import org.springframework.web.servlet.view.RedirectView
 import java.time.LocalDate
 import java.util.*
 
+@ActiveProfiles("test")
 @SpringBootTest
 class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
 

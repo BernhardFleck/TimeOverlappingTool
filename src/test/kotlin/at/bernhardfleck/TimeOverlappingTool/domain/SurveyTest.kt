@@ -3,8 +3,10 @@ package at.bernhardfleck.TimeOverlappingTool.domain
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import java.time.LocalDate
 
+@ActiveProfiles("test")
 @SpringBootTest
 class SurveyTest {
 
