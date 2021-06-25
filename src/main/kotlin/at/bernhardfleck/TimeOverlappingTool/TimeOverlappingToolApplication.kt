@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import java.time.LocalDate
+import java.time.LocalDate.now
 import java.util.*
 
 
@@ -39,6 +40,26 @@ class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyCont
         println("http://localhost:8080/survey/result/" + surveyId)
         println()
         surveyController.participateInSurvey(dtoForParticipation, surveyId.toString())
+
+        // Create finishing or finished surveys for trying out spring integration
+        val finishingDto = SurveyDTO(
+            purpose = "SoccerNight",
+            minimumParticipantsForMatch = 2,
+            startDate = now().minusDays(13),
+            endDate = now(),
+            participant = Participant("Jane", "Doe"),
+            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+        )
+        val finishedDto = SurveyDTO(
+            purpose = "SoccerNight",
+            minimumParticipantsForMatch = 2,
+            startDate = now().minusDays(14),
+            endDate = now().minusDays(1),
+            participant = Participant("Jane", "Doe"),
+            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+        )
+        surveyController.createSurvey(finishingDto)
+        surveyController.createSurvey(finishedDto)
 
     }
 }
