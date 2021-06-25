@@ -1,4 +1,13 @@
+logging:
+  file:
+    path: .
+    name: application.log
 spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+  integration:
+    pollingRateInMilliSec: 1000
   datasource:
     url: jdbc:h2:mem:databaseName
     driverClassName: org.h2.Driver
