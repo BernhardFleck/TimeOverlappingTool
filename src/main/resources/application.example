@@ -7,7 +7,7 @@ spring:
     ansi:
       enabled: ALWAYS
   integration:
-    pollingRateInMilliSec: 1000
+    pollingRateInMilliSec: 3600000
   datasource:
     url: jdbc:h2:mem:databaseName
     driverClassName: org.h2.Driver
