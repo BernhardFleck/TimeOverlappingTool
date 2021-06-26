@@ -16,38 +16,35 @@
     <link rel="stylesheet" href="../static/css/textField.css"/>
 </head>
 <body>
-<!--icons can be looked up at https://materializecss.com/icons.html-->
-<div class="container valign-wrapper fullHeightOfParent center-align">
-    <div class="row border halfHeightOfParent">
-        <div class="col s12 m6 border fullHeightOfParent valign-wrapper">
-            <div class="center-align fullWidthOfParent">
-                <!-- Todo replace image!!-->
-                <img class="responsive-img" alt=""
-                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWSsRnjJVmJrJQy7Urk4gi-pWcnO_lk2xGNQ&usqp=CAU"/>
-                <h4>Welcome to Surveyli</h4>
-                <b><i>Your tiny tool for sharing surveys with your friends.</i></b>
-                <p class="textTransformedAsWritten">By creating a survey you will get a list of the next two weeks where
-                    you select the dates that suit you
-                    best. We all know friends who say they will join on a certain date, but then when the day comes
-                    closer they suddenly cannot show up because the date was just too far away or they probably forgot
-                    it. With this approach events can be started earlier and they are more likely to happen for
-                    real.</p>
-                <hr class="hide-on-med-and-up"/>
-            </div>
+<div class="row fullHeight">
+    <div class="col s12 m6 border heightOfParent valign-wrapper">
+        <div class="center-align alignWelcomeTextOnMobile fullWidthOfParent border">
+            <!-- Todo replace image!!-->
+            <img class="responsive-img" alt=""
+                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWSsRnjJVmJrJQy7Urk4gi-pWcnO_lk2xGNQ&usqp=CAU"/>
+            <h4>Welcome to Surveyli</h4>
+            <b><i>Your tiny tool for sharing surveys with your friends.</i></b>
+            <p class="textTransformedAsWritten">By creating a survey you will get a list of the next two weeks where
+                you select the dates that suit you
+                best. We all know friends who say they will join on a certain date, but then when the day comes
+                closer they suddenly cannot show up because the date was just too far away or they probably forgot
+                it. With this approach events can be started earlier and they are more likely to happen for
+                real.</p>
+            <hr class="hide-on-med-and-up"/>
         </div>
-        <div class="col s12 m6 border fullHeightOfParent">
-            <h4>I want to:</h4>
+    </div>
+    <div class="col s12 m6 border heightOfParent valign-wrapper mainColor">
+        <div class="center-align alignButtonsOnMobile fullWidthOfParent border">
+            <h4 class="white-text">I want to:</h4>
             <a href="/survey/create">
                 <fieldset class="card-panel hoverable">
-                    <legend class="left-align">Creation</legend>
                     <h5>create a new survey</h5>
-                    <button class="btn waves-effect waves-light blue" type="submit" name="action">Submit
+                    <button class="btn waves-effect waves-light mainColorDark" type="submit" name="action">Submit
                         <i class="material-icons right">group_add</i>
                     </button>
                 </fieldset>
             </a>
             <fieldset class="card-panel hoverable">
-                <legend class="left-align">Participation</legend>
                 <h5>participate in a survey</h5>
                 <form action="/survey/participate/" method="post">
                     <div class="input-field">
@@ -56,7 +53,7 @@
                         <label for="surveyId" class="textTransformedAsWritten">Enter the survey ID here</label>
                         <span class="helper-text" data-error="wrong format" data-success="correct format"></span>
                     </div>
-                    <button class="btn waves-effect waves-light blue" type="submit" name="action">Submit
+                    <button class="btn waves-effect waves-light mainColorDark" type="submit" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
                 </form>
@@ -64,7 +61,7 @@
         </div>
     </div>
 </div>
-<footer class="page-footer blue textTransformedAsWritten">
+<footer class="row page-footer darken-2 grey textTransformedAsWritten">
     <div class="container">
         <div class="row">
             <div class="col s12 m10">
@@ -74,9 +71,8 @@
                 <p class="grey-text text-lighten-4 textTransformedAsWritten">
                     For evaluating a survey personal data gets processed, especially your first name, last name and
                     the
-                    selected dates where you are available for the event. With using this tool you agree that this
-                    data
-                    may be stored permanently.
+                    selected dates where you are available for an event. With using this tool you agree that this
+                    data may be seen by other participants and in addition it may be stored permanently.
                     Finished surveys will be deleted automatically at the day after the end of the survey,
                     this does also include your personal data.
                 </p>
@@ -100,5 +96,7 @@
         </div>
     </div>
 </footer>
+
+
 </body>
 </html>

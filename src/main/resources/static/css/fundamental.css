@@ -1,8 +1,16 @@
-body, .uppercase{
+body, .uppercase {
     text-transform: uppercase;
 }
 
-.textTransformedAsWritten{
+.mainColor{
+    background-color: #03a9f4 !important;
+}
+
+.mainColorDark{
+    background-color: #038fd9 !important;
+}
+
+.textTransformedAsWritten {
     text-transform: none;
 }
 
@@ -10,12 +18,8 @@ html, body {
     height: 100vh;
 }
 
-.fullHeightOfParent {
-    min-height: 100%;
-}
-
-.halfHeightOfParent {
-    min-height: 50%;
+.fullHeight {
+    min-height: 100vh !important;
 }
 
 .fullWidthOfParent {
@@ -23,7 +27,7 @@ html, body {
 }
 
 .border {
-    /* uncomment this for testing purposes
+    /*
     border: 1px solid black;
     */
 }
