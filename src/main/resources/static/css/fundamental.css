@@ -1,0 +1,41 @@
+body, .uppercase{
+    text-transform: uppercase;
+}
+
+.textTransformedAsWritten{
+    text-transform: none;
+}
+
+html, body {
+    height: 100vh;
+}
+
+.fullHeightOfParent {
+    height: 100%;
+}
+
+.halfHeightOfParent {
+    height: 50%;
+}
+
+.fullWidthOfParent {
+    width: 100%;
+}
+
+.border {
+    /* uncomment this for testing purposes
+    border: 1px solid black;
+    */
+}
+
+a:link {
+    color: black;
+}
+
+.noFloat {
+    float: none !important;
+}
+
+.row {
+    margin: 0 !important;
+}
