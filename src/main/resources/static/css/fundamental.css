@@ -55,6 +55,10 @@ a:link {
     margin: 0 !important;
 }
 
-.whiteBackground{
+.whiteBackground {
     background-color: #ffffff;
+}
+
+.slightlyMarginBottom {
+    margin-bottom: 50px;
 }

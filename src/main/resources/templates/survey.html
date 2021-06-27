@@ -22,8 +22,8 @@
     <script type="text/javascript" src="../static/scripts/wowInit.js"></script>
 </head>
 <body>
-<div id="content" class="row border fullHeight">
-    <div class="col s10 offset-s1 xl6 offset-xl3 fullHeight whiteBackground valign-wrapper border">
+<div id="content" class="row border fullHeight valign-wrapper">
+    <div class="col s10 offset-s1 xl6 offset-xl3 card-panel whiteBackground border z-depth-4">
         <div class="row">
             <h5 class="center-align"
                 th:text="${intention} eq 'createSurvey' ? 'creation' : 'participation'">
@@ -75,30 +75,27 @@
                     <h6><b>When do you have time?</b></h6>
                     <div class="row">
                         <div class="col s4 m3 l2 xl2 border" th:each="date, status : *{selectedDates}">
-                            <p>
-                                <label>
-                                    <input type="checkbox" th:name="selectedDates" th:value="${date}"
-                                           th:id="date + ${status.index}"/>
-                                    <span th:text="${#temporals.format(date, 'dd.MM')}">27.06</span>
-                                    <input th:if="${status.first}" type="hidden" th:name="startDate"
-                                           th:value="${date}"/>
-                                    <input th:if="${status.last}" type="hidden" th:name="endDate" th:value="${date}"/>
-                                </label>
-                            </p>
+                            <label>
+                                <input type="checkbox" th:name="selectedDates" th:value="${date}"
+                                       th:id="date + ${status.index}"/>
+                                <span th:text="${#temporals.format(date, 'dd.MM')}">27.06</span>
+                                <input th:if="${status.first}" type="hidden" th:name="startDate"
+                                       th:value="${date}"/>
+                                <input th:if="${status.last}" type="hidden" th:name="endDate" th:value="${date}"/>
+                            </label>
                         </div>
                     </div>
-
                 </div>
                 <div class="row border">
                     <div class="center-align border">
-                        <p><i class="material-icons">warning</i></p>
+                        <p><i class="material-icons biggerIcon">warning</i></p>
                         <p>You cannot change your submission afterwards, so better be sure that you selected the right
                             dates. <br/>If no date suits you, then you should still submit the survey to show your
                             friends
                             that you have seen the invitation but you cannot participate.</p>
                     </div>
                 </div>
-                <div class="border fullWidthOfParent center-align">
+                <div class="border fullWidthOfParent center-align slightlyMarginBottom">
                     <button class="btn waves-effect waves-light mainColorDark" type="submit" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
