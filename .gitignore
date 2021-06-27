@@ -28,3 +28,4 @@ mvnw.cmd
 .idea/
 target/
 src/main/resources/application.yml
+*.png

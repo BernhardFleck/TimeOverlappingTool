@@ -1,13 +1,16 @@
-body, .uppercase {
-    text-transform: uppercase;
+:root {
+
+    --mainColor: #03a9f4;
+
+    --mainColorDark: #038fd9;
 }
 
-.mainColor{
-    background-color: #03a9f4 !important;
+.mainColor {
+    background-color: var(--mainColor) !important;
 }
 
-.mainColorDark{
-    background-color: #038fd9 !important;
+.mainColorDark {
+    background-color: var(--mainColorDark) !important;
 }
 
 .textTransformedAsWritten {
@@ -16,6 +19,10 @@ body, .uppercase {
 
 html, body {
     height: 100vh;
+}
+
+body, .uppercase {
+    text-transform: uppercase;
 }
 
 .fullHeight {
