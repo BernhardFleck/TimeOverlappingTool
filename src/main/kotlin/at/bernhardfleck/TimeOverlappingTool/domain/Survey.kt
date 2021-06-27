@@ -15,7 +15,7 @@ data class Survey(
     val purpose: String,
     val startDate: LocalDate,
     val endDate: LocalDate,
-    val minimumParticipantsForMatch: Int,
+    val minimumParticipants: Int,
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = [ALL])
@@ -28,7 +28,7 @@ data class Survey(
 ) : AbstractPersistable<UUID>() {
 
     fun validate() {
-        if (minimumParticipantsForMatch < 2) throw IllegalArgumentException("it needs two people for a match at least")
+        if (minimumParticipants < 2) throw IllegalArgumentException("it needs two people for a match at least")
         purpose.ifBlank { throw IllegalArgumentException("purpose must not be blank") }
         participants.ifEmpty { throw IllegalArgumentException("the creator has to be part of the participants at least") }
         participants.forEach { it.validate() }

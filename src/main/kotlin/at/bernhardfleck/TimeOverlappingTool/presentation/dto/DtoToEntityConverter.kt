@@ -12,7 +12,7 @@ class DtoToEntityConverter {
                 dto.purpose,
                 dto.startDate,
                 dto.endDate,
-                dto.minimumParticipantsForMatch,
+                dto.minimumParticipants,
                 participants = mutableListOf(),
                 submissions = mutableListOf()
             )
@@ -23,7 +23,7 @@ class DtoToEntityConverter {
                 survey.purpose,
                 survey.startDate,
                 survey.endDate,
-                survey.minimumParticipantsForMatch,
+                survey.minimumParticipants,
                 participant = Participant(),
                 selectedDates = datesFromStartToEndOf(survey)
             )

@@ -33,7 +33,7 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
         )
         val survey = Survey(
             purpose = "SoccerNight",
-            minimumParticipantsForMatch = 5,
+            minimumParticipants = 5,
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participants = participants,
@@ -81,7 +81,7 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
         )
         val survey = Survey(
             purpose = "SoccerNight",
-            minimumParticipantsForMatch = 5,
+            minimumParticipants = 5,
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participants = participants,
@@ -116,7 +116,7 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
         )
         val survey = Survey(
             purpose = "SoccerNight",
-            minimumParticipantsForMatch = 5,
+            minimumParticipants = 5,
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participants = participants,

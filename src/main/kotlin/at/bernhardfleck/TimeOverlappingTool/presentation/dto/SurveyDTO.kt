@@ -13,7 +13,7 @@ class SurveyDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     lateinit var endDate: LocalDate
 
-    var minimumParticipantsForMatch = 2
+    var minimumParticipants = 2
 
     var participant: Participant = Participant()
 
@@ -33,7 +33,7 @@ class SurveyDTO {
         this.purpose = purpose
         this.startDate = startDate
         this.endDate = endDate
-        this.minimumParticipantsForMatch = minimumParticipantsForMatch
+        this.minimumParticipants = minimumParticipantsForMatch
         this.participant = participant
         this.selectedDates = selectedDates
     }

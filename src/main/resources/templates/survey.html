@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="input-field col s12 m6">
-                        <input id="minimumParticipantsFields" th:field="*{minimumParticipantsForMatch}" type="number"
+                        <input id="minimumParticipantsFields" th:field="*{minimumParticipants}" type="number"
                                class="validate left-align" minlength="2" min="2"
                                th:disabled="${intention} eq 'participateSurvey'"
                                maxlength="50" required/>

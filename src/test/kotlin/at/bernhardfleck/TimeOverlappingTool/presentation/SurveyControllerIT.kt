@@ -30,7 +30,7 @@ class SurveyControllerIT(
         val creator: Participant
         val surveyDTO = SurveyDTO()
         surveyDTO.purpose = "SoccerNight"
-        surveyDTO.minimumParticipantsForMatch = 5
+        surveyDTO.minimumParticipants = 5
         surveyDTO.startDate = LocalDate.of(2021, 6, 19)
         surveyDTO.endDate = LocalDate.of(2021, 7, 3)
         surveyDTO.selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
@@ -55,7 +55,7 @@ class SurveyControllerIT(
         val selectedDates: List<LocalDate>
         val surveyDTO = SurveyDTO()
         surveyDTO.purpose = "SoccerNight"
-        surveyDTO.minimumParticipantsForMatch = 5
+        surveyDTO.minimumParticipants = 5
         surveyDTO.startDate = LocalDate.of(2021, 6, 19)
         surveyDTO.endDate = LocalDate.of(2021, 7, 3)
         surveyDTO.selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))

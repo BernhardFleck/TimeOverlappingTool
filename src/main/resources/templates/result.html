@@ -14,16 +14,16 @@
         <span th:text="*{purpose}">undefined</span>
     </div>
     <div>
-        Minimum participants needed for a match*:
-        <span th:text="*{minimumParticipantsForMatch}">undefined</span>
+        Minimum participants needed for starting the event:
+        <span th:text="*{minimumParticipants}">undefined</span>
     </div>
     <div>
         People who already participated in this survey:
         <ul th:each="entry : ${allDates}">
             <li>
                 <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
-                <span th:text="${'#' + #lists.size(entry.value)}">#0</span>
-                <span th:class="${ #lists.size(entry.value) >= survey.minimumParticipantsForMatch} ? 'green' : 'red'">&bull;</span>
+                <span th:text="${'#' + #lists.size(entry.value)}">#0</span> <!--todo use badges-->
+                <span th:class="${ #lists.size(entry.value) >= survey.minimumParticipants} ? 'green' : 'red'">&bull;</span>
                 <ul th:each="participant : ${entry.value}">
                     <li th:text="${participant.firstName + ' ' + participant.lastName}">Participant</li>
                 </ul>
@@ -31,10 +31,5 @@
         </ul>
     </div>
 </div>
-
-<p>
-    <sup>*</sup>A match is considered as an overlapping of the required participants on a certain date to be able to
-    start the event
-</p>
 </body>
 </html>

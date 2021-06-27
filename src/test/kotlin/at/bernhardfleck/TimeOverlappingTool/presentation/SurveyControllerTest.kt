@@ -83,7 +83,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
 
         assertThat(surveyDTO.purpose).isEqualTo("SoccerNight")
-        assertThat(surveyDTO.minimumParticipantsForMatch).isEqualTo(5)
+        assertThat(surveyDTO.minimumParticipants).isEqualTo(5)
     }
 
     @Test
