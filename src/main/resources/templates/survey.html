@@ -2,67 +2,145 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Timetable</title>
+    <title>SURVEYLI</title>
+    <!-- Todo make links static -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link type="text/css" rel="stylesheet" media="screen,projection"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/animate.css"/>
+    <!-- Todo make links runnable for spring "/css/mycss.css" -->
+    <link rel="stylesheet" href="../static/css/fundamental.css"/>
+    <link rel="stylesheet" href="../static/css/survey.css"/>
+    <link rel="stylesheet" href="../static/css/textField.css"/>
+    <script type="text/javascript" src="../static/scripts/materializeInit.js"></script>
+    <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/wowInit.js"></script>
 </head>
 <body>
+<div id="content" class="row border fullHeight">
+    <div class="col s10 offset-s1 xl6 offset-xl3 fullHeight whiteBackground valign-wrapper border">
+        <div class="row">
+            <h5 class="center-align"
+                th:text="${intention} eq 'createSurvey' ? 'creation' : 'participation'">
+                CREATION</h5>
 
-<form th:action="${intention} eq 'createSurvey' ?
+            <form th:action="${intention} eq 'createSurvey' ?
                 @{/survey/create} :
                 @{ '/survey/participate/' + ${surveyId}}"
-      method="post" th:object="${dto}">
-    <fieldset>
-        <legend>Who are you?</legend>
-        <label>
-            Enter your first name:
-            <input type="text" id="firstNameField" th:field="*{participant.firstName}" placeholder="John/Jane"/>
-        </label>
-        <label>
-            Enter your last name:
-            <input type="text" id="lastNameField" th:field="*{participant.lastName}" placeholder="Doe"/>
-        </label>
-        <label>
-            What is the purpose of the survey?
-            <input type="text" id="purposeField" th:field="*{purpose}" placeholder="Meet, Greet And Eat"
-                   th:disabled="${intention} eq 'participateSurvey'"/>
-        </label>
-        <label>
-            How many participants are needed for a match*?
-            <input type="number" id="minimumParticipantsFields" th:field="*{minimumParticipantsForMatch}"
-                   placeholder="2" min="2" th:disabled="${intention} eq 'participateSurvey'"/>
-        </label>
-    </fieldset>
-    <table>
-        <thead>
-        <tr>
-            <th>Dates of the next 14 days</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="date, status : *{selectedDates}">
-            <td>
-                <label>
-                    <span th:text="${date}"></span>
-                    <input type="checkbox" th:name="selectedDates" th:value="${date}" th:id="date + ${status.index}"/>
+                  method="post" th:object="${dto}">
+                <fieldset>
+                    <legend>Who are you?</legend>
+                    <div class="input-field col s12 m6">
+                        <input id="firstNameField" th:field="*{participant.firstName}" type="text"
+                               class="validate left-align" minlength="2"
+                               maxlength="30" required/>
+                        <label for="firstNameField">First Name</label>
+                        <span class="helper-text" data-error="wrong format" data-success=""></span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="lastNameField" th:field="*{participant.lastName}" type="text"
+                               class="validate left-align" minlength="2"
+                               maxlength="30"
+                               required/>
+                        <label for="lastNameField">Last Name</label>
+                        <span class="helper-text" data-error="wrong format" data-success=""></span>
+                    </div>
+                </fieldset>
 
-                    <input th:if="${status.first}" type="hidden" th:name="startDate" th:value="${date}"/>
-                    <input th:if="${status.last}" type="hidden" th:name="endDate" th:value="${date}"/>
-                </label>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <label>
-        You cannot change your submission afterwards, so better be sure that you selected the right dates.
-        <br/>
-        If no date suits you, then you should still submit the survey to show your friends that you have seen the
-        invitation but you cannot participate.
-        <br/>
-        <input type="submit" id="submitButton" value="Submit"/>
-    </label>
-</form>
-<p>
-    <sup>*</sup>A match is considered as an overlapping of the required participants on a certain date to be able to
-    start the event
-</p>
+                <fieldset>
+                    <legend>Details of the survey</legend>
+                    <div class="input-field col s12 m6">
+                        <input id="purposeField" th:field="*{purpose}" type="text"
+                               class="validate left-align" minlength="2"
+                               maxlength="50" th:disabled="${intention} eq 'participateSurvey'" required/>
+                        <label for="purposeField">Purpose</label>
+                        <span class="helper-text" data-error="wrong format" data-success=""></span>
+                    </div>
+
+                    <div class="input-field col s12 m6">
+                        <input id="minimumParticipantsFields" th:field="*{minimumParticipantsForMatch}" type="number"
+                               class="validate left-align" minlength="2" min="2"
+                               th:disabled="${intention} eq 'participateSurvey'"
+                               maxlength="50" required/>
+                        <label for="minimumParticipantsFields">Minimum participants</label>
+                        <span class="helper-text" data-error="wrong format" data-success=""></span>
+                    </div>
+                </fieldset>
+                <div class="row border">
+                    <h6><b>When do you have time?</b></h6>
+                    <div class="row">
+                        <div class="col s4 m3 l2 xl2 border" th:each="date, status : *{selectedDates}">
+                            <p>
+                                <label>
+                                    <input type="checkbox" th:name="selectedDates" th:value="${date}"
+                                           th:id="date + ${status.index}"/>
+                                    <span th:text="${#temporals.format(date, 'dd.MM')}">27.06</span>
+                                    <input th:if="${status.first}" type="hidden" th:name="startDate"
+                                           th:value="${date}"/>
+                                    <input th:if="${status.last}" type="hidden" th:name="endDate" th:value="${date}"/>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row border">
+                    <div class="center-align border">
+                        <p><i class="material-icons">warning</i></p>
+                        <p>You cannot change your submission afterwards, so better be sure that you selected the right
+                            dates. <br/>If no date suits you, then you should still submit the survey to show your
+                            friends
+                            that you have seen the invitation but you cannot participate.</p>
+                    </div>
+                </div>
+                <div class="border fullWidthOfParent center-align">
+                    <button class="btn waves-effect waves-light mainColorDark" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer id="footer" class="row page-footer darken-2 grey textTransformedAsWritten">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10">
+                <h6 class="white-text uppercase">
+                    <u>Cave</u>
+                </h6>
+                <p class="grey-text text-lighten-4 textTransformedAsWritten">
+                    For evaluating a survey personal data gets processed, especially your first name, last name and
+                    the
+                    selected dates where you are available for an event. With using this tool you agree that this
+                    data may be seen by other participants and in addition it may be stored permanently.
+                    Finished surveys will be deleted automatically at the day after the end of the survey,
+                    this does also include your personal data.
+                </p>
+            </div>
+            <div class="col s12 m2">
+                <h6 class="white-text uppercase"><u>Impressum</u></h6>
+                <ul>
+                    <li class="grey-text text-lighten-3">Bernhard Fleck</li>
+                    <li class="grey-text text-lighten-3">1210 Vienna</li>
+                    <li class="grey-text text-lighten-3">Austria</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <i class="grey-text text-lighten-4 left">&copy; 2021</i>
+            <i class="grey-text text-lighten-4 right">Thank you for using my tool. Feedback is
+                highly appreciated!</i>
+            <!--            todo add feedback form-->
+        </div>
+    </div>
+</footer>
 </body>
 </html>
