@@ -5,7 +5,8 @@
     <title>TimeOverlappingTool</title>
     <!-- Todo make links static -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link type="text/css" rel="stylesheet" media="screen,projection"
@@ -16,9 +17,9 @@
     <link rel="stylesheet" href="../static/css/fundamental.css"/>
     <link rel="stylesheet" href="../static/css/index.css"/>
     <link rel="stylesheet" href="../static/css/textField.css"/>
-    <script type="text/javascript" src="../static/scripts/dropdownInit.js"></script>
-    <script src="../static/scripts/wow.min.js"></script>
-    <script src="../static/scripts/wowInit.js"></script>
+    <script type="text/javascript" src="../static/scripts/materializeInit.js"></script>
+    <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/wowInit.js"></script>
 </head>
 <body>
 <div id="fullscreenIntroduction" class="row fullHeight">
@@ -51,10 +52,10 @@
             </a>
             <fieldset class="card-panel hoverable">
                 <h5>participate in a survey</h5>
-                <form action="/survey/participate/" method="post">
+                <form action="/survey/participate/" method="POST">
                     <div class="input-field">
                         <input id="surveyId" type="text" name="surveyId" class="validate center-align"
-                               minlength="20"/>
+                               minlength="20" maxlength="50" required/>
                         <label for="surveyId" class="textTransformedAsWritten">Enter the survey ID here</label>
                         <span class="helper-text" data-error="wrong format" data-success=""></span>
                     </div>
@@ -66,21 +67,23 @@
         </div>
     </div>
 </div>
+
 <div id="contact" class="row prismBackground">
     <div class="container black-text">
         <h4 class="center-align"><i class="material-icons">email</i>&nbsp;Contact</h4>
         <hr/>
     </div>
     <div class="container">
-        <form method="POST" action="mailto: bernhard-fleck@live.com" enctype="multipart/form-data">
+        <form method="POST" action="mailto: bernhard-fleck@live.com" enctype="text/plain">
             <div class="input-field col s12 m6">
                 <input id="firstNameField" type="text" name="firstName" class="validate left-align" minlength="2"
-                       max="30" required/>
+                       maxlength="30" required/>
                 <label for="firstNameField">First Name</label>
                 <span class="helper-text" data-error="wrong format" data-success=""></span>
             </div>
             <div class="input-field col s12 m6">
-                <input id="lastNameField" type="text" name="lastName" class="validate left-align" minlength="2" max="30"
+                <input id="lastNameField" type="text" name="lastName" class="validate left-align" minlength="2"
+                       maxlength="30"
                        required/>
                 <label for="lastNameField">Last Name</label>
                 <span class="helper-text" data-error="wrong format" data-success=""></span>
@@ -94,12 +97,21 @@
                     <option>Suggestions For Improvements</option>
                 </select>
             </div>
-            <div class="input-field col s12 m12">
-                <textarea id="messageBody" name="message" class="materialize-textarea validate" rows="2"
-                          minlength="5" required></textarea>
-                <label for="messageBody">Message</label>
-                <span class="helper-text" data-error="wrong format" data-success=""></span>
+            <div class="row">
+                <div class="input-field col s11">
+                    <textarea id="messageBody" name="message" class="materialize-textarea validate" rows="2"
+                              minlength="5" required></textarea>
+                    <label for="messageBody">Message</label>
+                    <span class="helper-text" data-error="wrong format" data-success=""></span>
+                </div>
+                <div class="input-field col s1">
+                    <a class="tooltipped" data-position="left"
+                       data-tooltip="The format in your email client will be weird, but don't worry, just send it">
+                        <i class="material-icons black-text">perm_device_information</i>
+                    </a>
+                </div>
             </div>
+
             <div class="row">
                 <button class="left btn waves-effect waves-light pulse mainColorDark" type="submit" name="action">Send
                     <i class="material-icons right">send</i>
@@ -111,6 +123,7 @@
         </form>
     </div>
 </div>
+
 <footer id="footer" class="row page-footer darken-2 grey textTransformedAsWritten">
     <div class="container">
         <div class="row">
