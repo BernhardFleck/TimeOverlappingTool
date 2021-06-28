@@ -32,15 +32,16 @@
                 <hr/>
             </div>
             <div class="container textTransformedAsWritten">
-                <p>To let friends participate in your survey, you can take this number <b
-                        th:text="${surveyId}">12345</b>
+                <p>To let friends participate in your survey, you can take this number
+                    <br/>
+                    <b th:text="${surveyId}">12345</b>
                     and send it to them. The only thing they need to do is pasting it onto the homepage of
                     <a th:href="@{'/'}">SURVEYLI</a>.
                 </p>
                 <p>It is even easier when you send them the following link which redirects directly to your survey:</p>
                 <div class="row">
                     <a id="link" th:href="@{'/survey/participate/' + ${surveyId}}"
-                       th:text="@{'/survey/participate/' + ${surveyId}}">
+                       th:text="@{'/survey/participate/' + ${surveyId}}"> <!--todo domain has to be added!-->
                         Sorry, I guess your number was lost during the process. Try it again or contact the owner of the
                         website.
                     </a>
