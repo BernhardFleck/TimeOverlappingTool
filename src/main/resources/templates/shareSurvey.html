@@ -2,13 +2,95 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Share Survey</title>
+    <title>SURVEYLI</title>
+    <!-- Todo make links static -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link type="text/css" rel="stylesheet" media="screen,projection"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/animate.css"/>
+    <!-- Todo make links runnable for spring "/css/mycss.css" -->
+    <link rel="stylesheet" href="../static/css/fundamental.css"/>
+    <link rel="stylesheet" href="../static/css/textField.css"/>
+    <script type="text/javascript" src="../static/scripts/clipboard.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/initialization.js"></script>
 </head>
-<body>
-<p>Hooray - Your survey was created successfully!</p>
-<p>To let others participate in, you can take the following URI and share it with your friends:</p>
-<a th:href="@{'/survey/participate/' + ${surveyId}}" th:text="@{'/survey/participate/' + ${surveyId}}">
-    Sorry, I guess your number was lost during the process. Try it again or contact the owner of the website.
-</a>
+<body class="blueTriangleBackground">
+<div id="content" class="row border fullHeight valign-wrapper wow zoomIn">
+    <div class="col s10 offset-s1 xl6 offset-xl3 card-panel thirdOfHeight valign-wrapper whiteBackground border z-depth-4">
+        <div class="row">
+            <div class="center-align">
+                <br/>
+                <i class="material-icons biggerIcon green-text">thumb_up</i>
+                <h5>Hooray!</h5>
+                <h6><i>Your survey was created successfully</i></h6>
+                <hr/>
+            </div>
+            <div class="container textTransformedAsWritten">
+                <p>To let friends participate in your survey, you can take this number <b
+                        th:text="${surveyId}">12345</b>
+                    and send it to them. The only thing they need to do is pasting it onto the homepage of
+                    <a th:href="@{'/'}">SURVEYLI</a>.
+                </p>
+                <p>It is even easier when you send them the following link which redirects directly to your survey:</p>
+                <div class="row">
+                    <a id="link" th:href="@{'/survey/participate/' + ${surveyId}}"
+                       th:text="@{'/survey/participate/' + ${surveyId}}">
+                        Sorry, I guess your number was lost during the process. Try it again or contact the owner of the
+                        website.
+                    </a>
+                    <button class="right btn waves-effect waves-light mainColorDark clipboardBtn"
+                            data-clipboard-target="#link">Copy
+                        <i class="material-icons right">content_copy</i>
+                    </button>
+                </div>
+                <br/>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer" class="row page-footer darken-2 grey textTransformedAsWritten">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10">
+                <h6 class="white-text uppercase">
+                    <u>Cave</u>
+                </h6>
+                <p class="grey-text text-lighten-4 textTransformedAsWritten">
+                    For evaluating a survey personal data gets processed, especially your first name, last name and
+                    the
+                    selected dates where you are available for an event. With using this tool you agree that this
+                    data may be seen by other participants and in addition it may be stored permanently.
+                    Finished surveys will be deleted automatically at the day after the end of the survey,
+                    this does also include your personal data.
+                </p>
+            </div>
+            <div class="col s12 m2">
+                <h6 class="white-text uppercase"><u>Impressum</u></h6>
+                <ul>
+                    <li class="grey-text text-lighten-3">Bernhard Fleck</li>
+                    <li class="grey-text text-lighten-3">1210 Vienna</li>
+                    <li class="grey-text text-lighten-3">Austria</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <i class="grey-text text-lighten-4 left">&copy; 2021</i>
+            <i class="grey-text text-lighten-4 right">Thank you for using my tool. Feedback is
+                highly appreciated!</i>
+            <!--            todo add feedback form-->
+        </div>
+    </div>
+</footer>
+
+
 </body>
 </html>

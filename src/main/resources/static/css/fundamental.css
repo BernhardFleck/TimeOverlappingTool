@@ -48,6 +48,10 @@ body, .uppercase {
     min-height: 100vh !important;
 }
 
+.thirdOfHeight {
+    min-height: 33vh !important;
+}
+
 .fullWidthOfParent {
     width: 100%;
 }
@@ -76,4 +80,8 @@ a:link {
 
 .slightlyMarginBottom {
     margin-bottom: 50px;
+}
+
+.biggerIcon {
+    font-size: xx-large;
 }
