@@ -23,7 +23,7 @@
 <body class="blueTriangleBackground">
 <div id="content" class="row border fullHeight valign-wrapper wow zoomIn">
     <div class="col s10 offset-s1 xl6 offset-xl3 card-panel thirdOfHeight valign-wrapper whiteBackground border z-depth-4">
-        <div class="row">
+        <div class="row fullWidthOfParent">
             <div class="center-align">
                 <br/>
                 <i class="material-icons biggerIcon green-text">thumb_up</i>
@@ -32,12 +32,19 @@
                 <hr/>
             </div>
             <div class="container textTransformedAsWritten">
-                <p>To let friends participate in your survey, you can take this number
-                    <br/>
-                    <b th:text="${surveyId}">12345</b>
-                    and send it to them. The only thing they need to do is pasting it onto the homepage of
-                    <a th:href="@{'/'}">SURVEYLI</a>.
-                </p>
+                <div class="row">
+                    <p>To let friends participate in your survey, you can take the number below
+                        and share it with them. The only thing they need to do is pasting it onto the homepage of
+                        <a th:href="@{'/'}">SURVEYLI</a>.
+                    </p>
+                    <div>
+                        <b id="surveyId" th:text="${surveyId}">12345</b>
+                        <button class="right btn waves-effect waves-light mainColorDark clipboardBtn"
+                                data-clipboard-target="#surveyId">Copy
+                            <i class="material-icons right">content_copy</i>
+                        </button>
+                    </div>
+                </div>
                 <p>It is even easier when you send them the following link which redirects directly to your survey:</p>
                 <div class="row">
                     <a id="link" th:href="@{'/survey/participate/' + ${surveyId}}"
