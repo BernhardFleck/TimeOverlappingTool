@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>SURVEYLI</title>
@@ -50,8 +50,8 @@
                 </fieldset>
             </a>
             <fieldset class="card-panel hoverable">
-                <form action="/survey/participate/" method="POST">
                 <h5 class="black-text">participate in a survey</h5>
+                <form th:action="@{/survey/participate}" method="GET">
                     <div class="input-field">
                         <input id="surveyId" type="text" name="surveyId" class="validate center-align"
                                minlength="20" maxlength="50" required/>
