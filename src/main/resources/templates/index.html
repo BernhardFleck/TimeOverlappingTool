@@ -43,15 +43,15 @@
             <h4 class="white-text">I want to:</h4>
             <a href="/survey/create">
                 <fieldset class="card-panel hoverable">
-                    <h5>create a new survey</h5>
+                    <h5 class="black-text">create a new survey</h5>
                     <button class="btn waves-effect waves-light mainColorDark" type="submit" name="action">Submit
                         <i class="material-icons right">group_add</i>
                     </button>
                 </fieldset>
             </a>
             <fieldset class="card-panel hoverable">
-                <h5>participate in a survey</h5>
                 <form action="/survey/participate/" method="POST">
+                <h5 class="black-text">participate in a survey</h5>
                     <div class="input-field">
                         <input id="surveyId" type="text" name="surveyId" class="validate center-align"
                                minlength="20" maxlength="50" required/>
