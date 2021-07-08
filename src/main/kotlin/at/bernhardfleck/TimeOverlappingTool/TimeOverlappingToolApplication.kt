@@ -17,21 +17,23 @@ class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyCont
 
     //TODO Delete init data
     override fun run(vararg args: String?) {
+        val tomorrow = now().plusDays(1)
+        val fourteenDaysLater = tomorrow.plusDays(14)
         val dtoForCreation = SurveyDTO(
             purpose = "SoccerNight",
             minimumParticipantsForMatch = 2,
-            startDate = LocalDate.of(2021, 6, 19),
-            endDate = LocalDate.of(2021, 7, 2),
+            startDate = tomorrow,
+            endDate = fourteenDaysLater,
             participant = Participant("Jane", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+            selectedDates = listOf(tomorrow)
         )
         val dtoForParticipation = SurveyDTO(
             purpose = "SoccerNight",
             minimumParticipantsForMatch = 2,
-            startDate = LocalDate.of(2021, 6, 19),
-            endDate = LocalDate.of(2021, 7, 2),
+            startDate = tomorrow,
+            endDate = fourteenDaysLater,
             participant = Participant("John", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21), LocalDate.of(2021, 6, 25))
+            selectedDates = listOf(tomorrow, fourteenDaysLater)
         )
 
         val modelAndView = surveyController.createSurvey(dtoForCreation)
