@@ -13,6 +13,10 @@
     background-color: var(--mainColor) !important;
 }
 
+.mainColorLight {
+    background-color: var(--mainColorLight) !important;
+}
+
 .mainColorDark {
     background-color: var(--mainColorDark) !important;
 }

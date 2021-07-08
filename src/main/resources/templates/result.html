@@ -2,34 +2,117 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Result</title>
-    <link rel="stylesheet" href="/css/result.css"/>
+    <title>SURVEYLI</title>
+    <!-- Todo make links static -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link type="text/css" rel="stylesheet" media="screen,projection"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Todo make links runnable for spring "/css/mycss.css" -->
+    <link rel="stylesheet" href="../static/css/animate.css"/>
+    <link rel="stylesheet" href="../static/css/fundamental.css"/>
+    <link rel="stylesheet" href="../static/css/result.css"/>
+    <script type="text/javascript" src="../static/scripts/clipboard.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/initialization.js"></script>
 </head>
-<body>
-<div th:object="${survey}">
-    <h1>Result Of The Survey:</h1>
-    <hr/>
-    <div>
-        Purpose:
-        <span th:text="*{purpose}">undefined</span>
-    </div>
-    <div>
-        Minimum participants needed for starting the event:
-        <span th:text="*{minimumParticipants}">undefined</span>
-    </div>
-    <div>
-        People who already participated in this survey:
-        <ul th:each="entry : ${allDates}">
-            <li>
-                <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
-                <span th:text="${'#' + #lists.size(entry.value)}">#0</span> <!--todo use badges-->
-                <span th:class="${ #lists.size(entry.value) >= survey.minimumParticipants} ? 'green' : 'red'">&bull;</span>
-                <ul th:each="participant : ${entry.value}">
-                    <li th:text="${participant.firstName + ' ' + participant.lastName}">Participant</li>
-                </ul>
-            </li>
-        </ul>
+<body class="blueTriangleBackground">
+<div id="content" class="row border fullHeight valign-wrapper wow zoomIn">
+    <div class="col s10 offset-s1 xl6 offset-xl3 card-panel thirdOfHeight valign-wrapper whiteBackground border z-depth-4">
+        <div class="row fullWidthOfParent" th:object="${survey}">
+            <div class="center-align">
+                <h5>Results</h5>
+                <hr/>
+                <div class="center-align">
+                    <h6>
+                        <i class="textTransformedAsWritten">Let others participate in this survey and share the number
+                            below</i>
+                        <br/>
+                    </h6>
+                    <div>
+                        <b id="surveyId" th:text="*{id}">12345</b>
+                        <button class="btn waves-effect waves-light mainColorDark clipboardBtn"
+                                data-clipboard-target="#surveyId">Copy
+                            <i class="material-icons right">content_copy</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="container textTransformedAsWritten">
+                <blockquote>
+                    <span th:text="*{purpose}">undefined</span>
+                    <div>
+                        You need at least
+                        <i th:text="*{minimumParticipants}">2</i>
+                        people for starting this event.
+                    </div>
+                    See who is already participating:
+                </blockquote>
+            </div>
+            <div class="row">
+                <div th:each="entry : ${allDates}" class="col s12 m6 xl4">
+                    <div class="card hoverable grey lighten-5 black-text">
+                        <div class="card-content">
+                            <p class="card-title">
+                                <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
+                                <span th:text="${'#' + #lists.size(entry.value)}" class="badge">#0</span>
+                            </p>
+                            <ul>
+                                <li th:each="participant : ${entry.value}" class="chip"
+                                    th:text="${participant.firstName + ' ' + participant.lastName}">
+                                    Participant
+                                </li>
+                                <li th:if="${ #lists.size(entry.value) == 0 }">
+                                    No Participants
+                                </li>
+                            </ul>
+                        </div>
+                        <div th:class="${ #lists.size(entry.value) >= survey.minimumParticipants} ? 'card-action green' : 'card-action red'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<footer id="footer" class="row page-footer darken-2 grey textTransformedAsWritten">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10">
+                <h6 class="white-text uppercase">
+                    <u>Cave</u>
+                </h6>
+                <p class="grey-text text-lighten-4 textTransformedAsWritten">
+                    For evaluating a survey personal data gets processed, especially your first name, last name and
+                    the
+                    selected dates where you are available for an event. With using this tool you agree that this
+                    data may be seen by other participants and in addition it may be stored permanently.
+                    Finished surveys will be deleted automatically at the day after the end of the survey,
+                    this does also include your personal data.
+                </p>
+            </div>
+            <div class="col s12 m2">
+                <h6 class="white-text uppercase"><u>Impressum</u></h6>
+                <ul>
+                    <li class="grey-text text-lighten-3">Bernhard Fleck</li>
+                    <li class="grey-text text-lighten-3">1210 Vienna</li>
+                    <li class="grey-text text-lighten-3">Austria</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <i class="grey-text text-lighten-4 left">&copy; 2021</i>
+            <i class="grey-text text-lighten-4 right">Thank you for using my tool. Feedback is
+                highly appreciated!</i>
+        </div>
+    </div>
+</footer>
+
+
 </body>
 </html>

@@ -5,3 +5,7 @@
 .green {
     color: yellowgreen;
 }
+
+blockquote{
+    border-left-color: black !important;
+}
