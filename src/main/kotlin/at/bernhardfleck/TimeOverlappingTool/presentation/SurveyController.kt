@@ -45,13 +45,11 @@ class SurveyController(@Autowired val service: SurveyService) {
     }
 
     @GetMapping("/participate/{surveyId}")
-    @ResponseBody
     fun showParticipationForm(@PathVariable surveyId: UUID): ModelAndView {
         return showParticipationFormOf(surveyId)
     }
 
     @GetMapping("/participate")
-    @ResponseBody
     fun showParticipationFormOf(@RequestParam surveyId: UUID): ModelAndView {
         //todo catch MethodArgumentTypeMismatchException (400) when input wasnt in the form of a UUID -> show error page
         val modelAndView = ModelAndView()
@@ -66,7 +64,6 @@ class SurveyController(@Autowired val service: SurveyService) {
     }
 
     @PostMapping("/participate/{surveyId}")
-    @ResponseBody
     fun participateInSurvey(
         @ModelAttribute surveyDTO: SurveyDTO,
         @PathVariable surveyId: String
