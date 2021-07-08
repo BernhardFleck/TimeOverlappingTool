@@ -37,3 +37,26 @@
     padding-top: 50px;
     padding-bottom: 50px;
 }
+
+/* Toggle: bar */
+.switch label input[type=checkbox]:checked + .lever {
+    background-color: var(--mainColorLight) !important;
+}
+
+/* Toggle: circle ON */
+.switch label input[type=checkbox]:checked + .lever:after {
+    background-color: var(--mainColorDark) !important;
+}
+
+/* Toggle: circle OFF */
+.switch label .lever:before {
+    background-color: lightgray;
+}
+
+/* Toggle: circle ON Animation to OFF */
+input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before,
+input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
+    -webkit-transform: scale(2.4);
+    transform: scale(2.4);
+    background-color: var(--mainColorWithOpacity);
+}

@@ -40,18 +40,25 @@
     </div>
     <div class="col s12 m6 border heightOfParent valign-wrapper mainColor">
         <div class="center-align alignCardsOnMobile fullWidthOfParent border wow fadeInUp">
-            <h4 class="white-text">I want to:</h4>
+            <h4 class="white-text">Now it's up to you</h4>
             <a href="/survey/create">
                 <fieldset class="card-panel hoverable">
-                    <h5 class="black-text">create a new survey</h5>
+                    <p class="black-text flow-text">new survey</p>
                     <button class="btn waves-effect waves-light mainColorDark" type="submit" name="action">Submit
                         <i class="material-icons right">group_add</i>
                     </button>
                 </fieldset>
             </a>
             <fieldset class="card-panel hoverable">
-                <h5 class="black-text">participate in a survey</h5>
-                <form th:action="@{/survey/participate}" method="GET">
+                <form action="/selectView" method="GET">
+                    <div class="switch">
+                        <label class="black-text flow-text">
+                            Participate
+                            <input id="selectionBox" name="selectionBox" type="checkbox" checked>
+                            <span class="lever"></span>
+                            Results
+                        </label>
+                    </div>
                     <div class="input-field">
                         <input id="surveyId" type="text" name="surveyId" class="validate center-align"
                                minlength="20" maxlength="50" required/>
