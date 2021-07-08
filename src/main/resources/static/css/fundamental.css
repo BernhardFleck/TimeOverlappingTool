@@ -56,6 +56,10 @@ body, .uppercase {
     min-height: 100vh !important;
 }
 
+.halfHeight {
+    min-height: 50vh !important;
+}
+
 .thirdOfHeight {
     min-height: 33vh !important;
 }

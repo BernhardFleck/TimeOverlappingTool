@@ -20,17 +20,28 @@
     <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
     <script type="text/javascript" src="../static/scripts/initialization.js"></script>
 </head>
-<body class="blueTriangleBackground">
-<div id="content" class="row border fullHeight valign-wrapper wow zoomIn">
-    <div class="col s10 offset-s1 xl6 offset-xl3 card-panel thirdOfHeight valign-wrapper whiteBackground border z-depth-4">
-        <div class="row fullWidthOfParent" th:object="${survey}">
-            <div class="center-align">
-                <h5>Results</h5>
-                <hr/>
-                <div class="center-align">
+<body>
+
+<div id="surveyDetails" class="row halfHeight blueTriangleBackground white-text">
+    <div class="col s12 m6 border heightOfParent valign-wrapper">
+        <div class="center-align alignWelcomeTextOnMobile fullWidthOfParent border">
+            <div class="wow fadeInLeft">
+                <img class="responsive-img" alt=""
+                     src="../static/images/surveyWithMargin.png"/>
+                <h3>Surveyli</h3>
+                <i>Your tiny tool for sharing surveys with your friends.</i>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m6 border heightOfParent valign-wrapper">
+        <div class="center-align alignCardsOnMobile fullWidthOfParent border wow fadeInRight">
+            <div class="row fullWidthOfParent" th:object="${survey}">
+                <div class="">
+                    <h5>Results</h5>
+                    <hr/>
                     <h6>
-                        <i class="textTransformedAsWritten">Let others participate in this survey and share the number
-                            below</i>
+                        <i class="textTransformedAsWritten">Let others participate in this survey <br/>
+                            and share the number below</i>
                         <br/>
                     </h6>
                     <div>
@@ -41,43 +52,50 @@
                         </button>
                     </div>
                 </div>
-            </div>
-            <div class="container textTransformedAsWritten">
-                <blockquote>
-                    <span th:text="*{purpose}">undefined</span>
-                    <div>
-                        You need at least
-                        <i th:text="*{minimumParticipants}">2</i>
-                        people for starting this event.
-                    </div>
-                    See who is already participating:
-                </blockquote>
-            </div>
-            <div class="row">
-                <div th:each="entry : ${allDates}" class="col s12 m6 xl4">
-                    <div class="card hoverable grey lighten-5 black-text">
-                        <div class="card-content">
-                            <p class="card-title">
-                                <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
-                                <span th:text="${'#' + #lists.size(entry.value)}" class="badge">#0</span>
-                            </p>
-                            <ul>
-                                <li th:each="participant : ${entry.value}" class="chip"
-                                    th:text="${participant.firstName + ' ' + participant.lastName}">
-                                    Participant
-                                </li>
-                                <li th:if="${ #lists.size(entry.value) == 0 }">
-                                    No Participants
-                                </li>
-                            </ul>
+                <div class="container textTransformedAsWritten">
+                    <blockquote>
+                        <span th:text="*{purpose}">undefined</span>
+                        <div>
+                            You need at least
+                            <i th:text="*{minimumParticipants}">2</i>
+                            people for starting this event.
                         </div>
-                        <div th:class="${ #lists.size(entry.value) >= survey.minimumParticipants} ? 'card-action green' : 'card-action red'"></div>
-                    </div>
+                        See who is already participating:
+                    </blockquote>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div id="dates" class="row halfHeight whiteTriangleBackground">
+    <div class="container">
+        <div th:each="entry : ${allDates}" class="col s12 m6 xl3 wow fadeIn">
+            <div class="card hoverable grey lighten-5 black-text">
+                <div class="card-content">
+                    <p class="card-title">
+                        <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
+                        <span th:class="${ #lists.size(entry.value) >= survey.minimumParticipants} ? 'badge green-text' : 'badge red-text'"
+                              class="badge">
+                            <b th:text="${'#' + #lists.size(entry.value)}">#0</b>
+                        </span>
+                    </p>
+                    <ul>
+                        <li th:each="participant : ${entry.value}" class="chip"
+                            th:text="${participant.firstName + ' ' + participant.lastName}">
+                            Participant
+                        </li>
+                        <li th:if="${ #lists.size(entry.value) == 0 }">
+                            <i>No Participants</i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <footer id="footer" class="row page-footer darken-2 grey textTransformedAsWritten">
     <div class="container">
         <div class="row">
