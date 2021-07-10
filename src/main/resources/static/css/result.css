@@ -6,29 +6,31 @@
     color: yellowgreen;
 }
 
-blockquote{
-    border-left-color: white !important;
+blockquote {
+    border-left-color: black !important;
 }
 
-@media only screen and (max-width: 1000px) {
-    .heightOfParent {
-        min-height: 50vh !important;
-    }
+.flexboxContainer{
+    display: flex;
+    align-items: stretch;
+}
+
+.stickyInParent{
+    top: 0;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
 }
 
 @media only screen and (min-width: 1001px) {
-    .heightOfParent {
-        min-height: 50vh !important;
-    }
 
     .alignWelcomeTextOnMobile {
-        width: 50% !important;
+        width: 75% !important;
         margin-left: auto !important;
         margin-right: 0 !important;
     }
 
     .alignCardsOnMobile {
-        width: 50% !important;
+        width: 75% !important;
         margin-right: auto !important;
         margin-left: 0 !important;
         padding: 10px;

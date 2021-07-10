@@ -22,78 +22,71 @@
 </head>
 <body>
 
-<div id="surveyDetails" class="row halfHeight blueTriangleBackground white-text">
-    <div class="col s12 m6 border heightOfParent valign-wrapper">
-        <div class="center-align alignWelcomeTextOnMobile fullWidthOfParent border">
-            <div class="wow fadeInLeft">
-                <img class="responsive-img" alt=""
-                     src="../static/images/surveyWithMargin.png"/>
+<div id="content" class="row fullHeight flexboxContainer">
+    <div id="surveyDetails" class="col s12 m6 border whiteTriangleBackground fullWidthOfParent">
+        <div class="center-align alignWelcomeTextOnMobile border stickyInParent">
+            <div class="wow fadeInDown border">
+                <img class="responsive-img" alt="" src="../static/images/surveyWithMargin.png"/>
                 <h3>Surveyli</h3>
                 <i>Your tiny tool for sharing surveys with your friends.</i>
-            </div>
-        </div>
-    </div>
-    <div class="col s12 m6 border heightOfParent valign-wrapper">
-        <div class="center-align alignCardsOnMobile fullWidthOfParent border wow fadeInRight">
-            <div class="row fullWidthOfParent" th:object="${survey}">
-                <div class="">
-                    <h5>Results</h5>
-                    <hr/>
-                    <h6>
-                        <i class="textTransformedAsWritten">Let others participate in this survey <br/>
-                            and share the number below</i>
-                        <br/>
-                    </h6>
-                    <div>
-                        <b id="surveyId" th:text="*{id}">12345</b>
-                        <button class="btn waves-effect waves-light mainColorDark clipboardBtn"
-                                data-clipboard-target="#surveyId">Copy
-                            <i class="material-icons right">content_copy</i>
-                        </button>
+                <div class="row fullWidthOfParent" th:object="${survey}">
+                    <div class="">
+                        <h5>Results</h5>
+                        <hr/>
+                        <h6>
+                            <i class="textTransformedAsWritten">Let others participate in this survey <br/>
+                                and share the number below</i>
+                            <br/>
+                        </h6>
+                        <div>
+                            <b id="surveyId" th:text="*{id}">12345</b>
+                            <button class="btn waves-effect waves-light mainColorDark clipboardBtn"
+                                    data-clipboard-target="#surveyId">Copy
+                                <i class="material-icons right">content_copy</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="container textTransformedAsWritten">
+                        <blockquote>
+                            <span th:text="*{purpose}">undefined</span>
+                            <div>
+                                You need at least
+                                <i th:text="*{minimumParticipants}">2</i>
+                                people for starting this event.
+                            </div>
+                            See who is already participating:
+                        </blockquote>
                     </div>
                 </div>
-                <div class="container textTransformedAsWritten">
-                    <blockquote>
-                        <span th:text="*{purpose}">undefined</span>
-                        <div>
-                            You need at least
-                            <i th:text="*{minimumParticipants}">2</i>
-                            people for starting this event.
-                        </div>
-                        See who is already participating:
-                    </blockquote>
-                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div id="dates" class="row halfHeight whiteTriangleBackground">
-    <div class="container">
-        <div th:each="entry : ${allDates}" class="col s12 m6 xl3 wow fadeIn">
-            <div class="card hoverable grey lighten-5 black-text">
-                <div class="card-content">
-                    <p class="card-title">
-                        <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
-                        <span th:class="${ #lists.size(entry.value) >= survey.minimumParticipants} ? 'badge green-text' : 'badge red-text'"
-                              class="badge">
+    <div id="cards" class="col s12 m6 border valign-wrapper mainColor">
+        <div class="alignCardsOnMobile fullWidthOfParent border">
+            <div th:each="entry : ${allDates}" class="col s12 m6 wow fadeIn">
+                <div class="card hoverable grey lighten-5 black-text">
+                    <div class="card-content">
+                        <p class="card-title">
+                            <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
+                            <span th:class="${ #lists.size(entry.value) >= survey.minimumParticipants} ? 'badge green-text' : 'badge red-text'"
+                                  class="badge">
                             <b th:text="${'#' + #lists.size(entry.value)}">#0</b>
                         </span>
-                    </p>
-                    <ul>
-                        <li th:each="participant : ${entry.value}" class="chip"
-                            th:text="${participant.firstName + ' ' + participant.lastName}">
-                            Participant
-                        </li>
-                        <li th:if="${ #lists.size(entry.value) == 0 }">
-                            <i>No Participants</i>
-                        </li>
-                    </ul>
+                        </p>
+                        <ul>
+                            <li th:each="participant : ${entry.value}" class="chip"
+                                th:text="${participant.firstName + ' ' + participant.lastName}">
+                                Participant
+                            </li>
+                            <li th:if="${ #lists.size(entry.value) == 0 }">
+                                <i>No Participants</i>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <footer id="footer" class="row page-footer darken-2 grey textTransformedAsWritten">

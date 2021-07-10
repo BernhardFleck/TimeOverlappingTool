@@ -1,11 +1,11 @@
 @media only screen and (max-width: 1000px) {
-    .heightOfParent {
+    .heightOf100vh {
         min-height: 100vh !important;
     }
 }
 
 @media only screen and (min-width: 1001px) {
-    .heightOfParent {
+    .heightOf100vh {
         min-height: 100vh !important;
     }
 
