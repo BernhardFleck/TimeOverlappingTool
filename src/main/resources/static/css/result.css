@@ -10,12 +10,12 @@ blockquote {
     border-left-color: black !important;
 }
 
-.flexboxContainer{
+.flexboxContainer {
     display: flex;
     align-items: stretch;
 }
 
-.stickyInParent{
+.stickyInParent {
     top: 0;
     position: -webkit-sticky; /* Safari */
     position: sticky;
