@@ -21,6 +21,11 @@ blockquote {
     position: sticky;
 }
 
+.chip {
+    overflow: hidden !important;
+    display: inherit !important;
+}
+
 @media only screen and (min-width: 1001px) {
 
     .alignWelcomeTextOnMobile {
