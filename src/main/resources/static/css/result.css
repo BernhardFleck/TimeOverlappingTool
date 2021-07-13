@@ -10,11 +10,6 @@ blockquote {
     border-left-color: black !important;
 }
 
-.flexboxContainer {
-    display: flex;
-    align-items: stretch;
-}
-
 .stickyInParent {
     top: 0;
     position: -webkit-sticky; /* Safari */
@@ -25,18 +20,24 @@ blockquote {
     overflow: hidden !important;
 }
 
-@media only screen and (min-width: 1001px) {
+@media all and (min-width: 600px) {
+    .contentContainer {
+        display: flex;
+        align-items: stretch;
+    }
+}
 
-    .alignWelcomeTextOnMobile {
-        width: 75% !important;
-        margin-left: auto !important;
-        margin-right: 0 !important;
+@media all and (min-width: 1000px) {
+
+    .cardContainer {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center;
     }
 
-    .alignCardsOnMobile {
-        width: 75% !important;
-        margin-right: auto !important;
-        margin-left: 0 !important;
-        padding: 10px;
+    .cardItem {
+        margin: 5px;
+        max-width: 40%;
     }
 }
