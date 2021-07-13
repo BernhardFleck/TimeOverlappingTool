@@ -75,7 +75,7 @@
                         </p>
                         <ul>
                             <li th:each="participant : ${entry.value}" class="chip"
-                                th:text="${participant.firstName + ' ' + participant.lastName}">
+                                th:text="${participant.firstName + ' ' + #strings.substring(participant.lastName, 0, 1) + '.'}">
                                 Participant
                             </li>
                             <li th:if="${ #lists.size(entry.value) == 0 }">
