@@ -58,12 +58,11 @@
                                 See who has already participated:
                             </div>
                             <ul class="collection">
-                                <li th:each="participant : *{participants}"
+                                <li th:each="participant, index : *{participants}"
                                     th:text="${participant.firstName + ' ' + participant.lastName}"
-                                    class="collection-item">Max
+                                    class="collection-item" th:classappend="${index.even}? 'grey lighten-4' : ''">Max
                                 </li>
                             </ul>
-                            <!-- TODO LIST ALL PARTICIPANTS (DISTINCT)                           -->
                         </blockquote>
                     </div>
                 </div>
