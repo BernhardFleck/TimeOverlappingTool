@@ -180,10 +180,10 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         val modelAndView = surveyController.createSurvey(dtoFromCreator)
         val surveyId = modelAndView.model.get("surveyId") as UUID
         val surveyIdString = surveyId.toString()
-        val redirectView: RedirectView
+        val redirectView: ModelAndView
 
         redirectView = surveyController.participateInSurvey(dtoFromParticipant, surveyIdString)
-        expectedForwardingPage = redirectView.url!!
+        expectedForwardingPage = redirectView.viewName!!
 
         assertThat(expectedForwardingPage).contains("result")
     }

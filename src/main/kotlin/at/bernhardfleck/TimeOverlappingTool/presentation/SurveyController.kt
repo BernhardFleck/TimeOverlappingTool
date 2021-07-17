@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
-import org.springframework.web.servlet.view.RedirectView
 import java.util.*
 
 @Controller
 @RequestMapping("/survey")
+class SurveyController(@Autowired val service: SurveyService) : BaseController() {
 
     private val surveyViewName = "survey"
     private val shareSurveyViewName = "shareSurvey"
@@ -30,9 +30,16 @@ import java.util.*
         return modelAndView
     }
 
-    //TODO add bindingresult check and what about returning responseEntities?
     @PostMapping("/create")
     fun createSurvey(@ModelAttribute surveyDTO: SurveyDTO): ModelAndView {
+        return try {
+            createSurveyOf(surveyDTO)
+        } catch (exception: IllegalArgumentException) {
+            addErrorMessageToView(exception, showSurveyCreationView())
+        }
+    }
+
+    private fun createSurveyOf(surveyDTO: SurveyDTO): ModelAndView {
         val modelAndView = ModelAndView()
         val submission = service.getSubmissionFrom(surveyDTO)
         var survey = convert(surveyDTO)
@@ -53,7 +60,14 @@ import java.util.*
 
     @GetMapping("/participate")
     fun showParticipationViewOf(@RequestParam surveyId: UUID): ModelAndView {
-        //todo catch MethodArgumentTypeMismatchException (400) when input wasnt in the form of a UUID -> show error page
+        return try {
+            loadParticipationPageOf(surveyId)
+        } catch (exception: IllegalArgumentException) {
+            addErrorMessageToView(exception, showSurveyCreationView())
+        }
+    }
+
+    private fun loadParticipationPageOf(surveyId: UUID): ModelAndView {
         val modelAndView = ModelAndView()
         val survey = service.getSurveyBy(surveyId)
         val surveyDTO = convert(survey)
@@ -69,16 +83,27 @@ import java.util.*
     fun participateInSurvey(
         @ModelAttribute surveyDTO: SurveyDTO,
         @PathVariable surveyId: String
-    ): RedirectView {
+    ): ModelAndView {
+        return try {
+            participation(surveyId, surveyDTO)
+            redirectToSharingPage(surveyId)
+        } catch (exception: IllegalArgumentException) {
+            addErrorMessageToView(exception, showSurveyCreationView())
+        }
+    }
+
+    private fun participation(surveyId: String, surveyDTO: SurveyDTO) {
         val surveyId = UUID.fromString(surveyId)
         val submission = service.getSubmissionFrom(surveyDTO)
         val survey = service.getSurveyBy(surveyId)
-        val resultPageUrl = "/survey/result/$surveyId"
 
         submission.validate()
         service.participation(survey, submission)
+    }
 
-        return RedirectView(resultPageUrl)
+    private fun redirectToSharingPage(surveyId: String): ModelAndView {
+        val resultPageUrl = "redirect:/survey/result/$surveyId"
+        return ModelAndView(resultPageUrl)
     }
 
 }
