@@ -96,4 +96,5 @@ body, .uppercase {
 
 .invisible {
     visibility: hidden !important;
+    display: none !important;
 }
