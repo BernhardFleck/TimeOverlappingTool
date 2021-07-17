@@ -13,10 +13,19 @@ import java.util.*
 class ResultController(
     @Autowired val surveyService: SurveyService,
     @Autowired val resultService: ResultService,
-) {
+    @Autowired val indexController: IndexController,
+) : BaseController() {
 
     @GetMapping("/survey/result/{surveyId}")
-    fun showResultViewBy(@PathVariable surveyId: String): ModelAndView {
+    fun showResultView(@PathVariable surveyId: String): ModelAndView {
+        return try {
+            showResultViewOf(surveyId)
+        } catch (exception: IllegalArgumentException) {
+            addErrorMessageToPage(exception, indexController.showIndexPage())
+        }
+    }
+
+    private fun showResultViewOf(surveyId: String): ModelAndView {
         val modelAndView = ModelAndView()
         val surveyId = UUID.fromString(surveyId)
         val survey = surveyService.getSurveyBy(surveyId)

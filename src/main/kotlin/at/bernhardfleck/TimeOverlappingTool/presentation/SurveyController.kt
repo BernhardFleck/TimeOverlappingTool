@@ -7,6 +7,7 @@ import at.bernhardfleck.TimeOverlappingTool.service.SurveyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 import org.springframework.web.servlet.ModelAndView
 import java.util.*
 
@@ -55,14 +56,22 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
 
     @GetMapping("/participate/{surveyId}")
     fun showParticipationPage(@PathVariable surveyId: UUID): ModelAndView {
-        return showParticipationPageOf(surveyId)
+        return try {
+            showParticipationPageOf(surveyId)
+        } catch (exception: MethodArgumentTypeMismatchException) {
+            addErrorMessageToPage(exception, showSurveyCreationPage())
+        }
     }
+    //TODO add global error page - handle org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+    // because when the user types in anything else but a UUID in the URL it doesnt even go inside this method.
 
     @GetMapping("/participate")
     fun showParticipationPageOf(@RequestParam surveyId: UUID): ModelAndView {
         return try {
             loadParticipationPageOf(surveyId)
         } catch (exception: IllegalArgumentException) {
+            addErrorMessageToPage(exception, showSurveyCreationPage())
+        } catch (exception: MethodArgumentTypeMismatchException) {
             addErrorMessageToPage(exception, showSurveyCreationPage())
         }
     }
