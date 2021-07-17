@@ -13,16 +13,18 @@ import java.util.*
 
 @Controller
 @RequestMapping("/survey")
-class SurveyController(@Autowired val service: SurveyService) {
+
+    private val surveyViewName = "survey"
+    private val shareSurveyViewName = "shareSurvey"
 
     @GetMapping("/create")
-    fun showSurveyInView(): ModelAndView {
+    fun showSurveyCreationView(): ModelAndView {
         val modelAndView = ModelAndView()
         val surveyDTO = SurveyDTO()
         val datesOfNextTwoWeeks = getNextTwoWeeks()
 
         surveyDTO.selectedDates = datesOfNextTwoWeeks
-        modelAndView.viewName = "survey"
+        modelAndView.viewName = surveyViewName
         modelAndView.addObject("dto", surveyDTO)
         modelAndView.addObject("intention", "createSurvey")
         return modelAndView
@@ -39,24 +41,24 @@ class SurveyController(@Autowired val service: SurveyService) {
         survey.validate()
         survey = service.save(survey)
 
-        modelAndView.viewName = "shareSurvey"
+        modelAndView.viewName = shareSurveyViewName
         modelAndView.addObject("surveyId", survey.id)
         return modelAndView
     }
 
     @GetMapping("/participate/{surveyId}")
-    fun showParticipationForm(@PathVariable surveyId: UUID): ModelAndView {
-        return showParticipationFormOf(surveyId)
+    fun showParticipationView(@PathVariable surveyId: UUID): ModelAndView {
+        return showParticipationViewOf(surveyId)
     }
 
     @GetMapping("/participate")
-    fun showParticipationFormOf(@RequestParam surveyId: UUID): ModelAndView {
+    fun showParticipationViewOf(@RequestParam surveyId: UUID): ModelAndView {
         //todo catch MethodArgumentTypeMismatchException (400) when input wasnt in the form of a UUID -> show error page
         val modelAndView = ModelAndView()
         val survey = service.getSurveyBy(surveyId)
         val surveyDTO = convert(survey)
 
-        modelAndView.viewName = "survey"
+        modelAndView.viewName = surveyViewName
         modelAndView.addObject("dto", surveyDTO)
         modelAndView.addObject("surveyId", surveyId)
         modelAndView.addObject("intention", "participateSurvey")
