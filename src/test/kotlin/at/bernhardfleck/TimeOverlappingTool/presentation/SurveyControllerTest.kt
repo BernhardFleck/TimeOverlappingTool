@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.web.servlet.ModelAndView
-import org.springframework.web.servlet.view.RedirectView
 import java.time.LocalDate
 import java.util.*
 
@@ -27,7 +26,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         val passedDTO: SurveyDTO
         val passedDates: List<LocalDate>
 
-        passedModelAndView = surveyController.showSurveyCreationView()
+        passedModelAndView = surveyController.showSurveyCreationPage()
         passedDTO = passedModelAndView.model.get("dto") as SurveyDTO
         passedDates = passedDTO.selectedDates
 
@@ -40,7 +39,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         val passedDTO: SurveyDTO
         val passedDates: List<LocalDate>
 
-        passedModelAndView = surveyController.showSurveyCreationView()
+        passedModelAndView = surveyController.showSurveyCreationPage()
         passedDTO = passedModelAndView.model.get("dto") as SurveyDTO
         passedDates = passedDTO.selectedDates
 
@@ -79,7 +78,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
 
-        modelAndView = surveyController.showParticipationViewOf(surveyId)
+        modelAndView = surveyController.showParticipationPageOf(surveyId)
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
 
         assertThat(surveyDTO.purpose).isEqualTo("SoccerNight")
@@ -99,7 +98,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
 
-        modelAndView = surveyController.showParticipationViewOf(surveyId)
+        modelAndView = surveyController.showParticipationPageOf(surveyId)
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
 
         assertThat(surveyDTO.selectedDates).contains(
@@ -133,7 +132,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
 
-        modelAndView = surveyController.showParticipationViewOf(surveyId)
+        modelAndView = surveyController.showParticipationPageOf(surveyId)
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
 
         assertThat(surveyDTO.selectedDates.minOrNull()).isEqualTo(LocalDate.of(2021, 6, 19))
@@ -152,7 +151,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
 
-        modelAndView = surveyController.showParticipationViewOf(surveyId)
+        modelAndView = surveyController.showParticipationPageOf(surveyId)
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
 
         assertThat(surveyDTO.selectedDates.maxOrNull()).isEqualTo(LocalDate.of(2021, 7, 2))

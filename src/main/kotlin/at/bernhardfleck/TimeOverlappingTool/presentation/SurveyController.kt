@@ -18,7 +18,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
     private val shareSurveyViewName = "shareSurvey"
 
     @GetMapping("/create")
-    fun showSurveyCreationView(): ModelAndView {
+    fun showSurveyCreationPage(): ModelAndView {
         val modelAndView = ModelAndView()
         val surveyDTO = SurveyDTO()
         val datesOfNextTwoWeeks = getNextTwoWeeks()
@@ -35,7 +35,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
         return try {
             createSurveyOf(surveyDTO)
         } catch (exception: IllegalArgumentException) {
-            addErrorMessageToView(exception, showSurveyCreationView())
+            addErrorMessageToView(exception, showSurveyCreationPage())
         }
     }
 
@@ -54,16 +54,16 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
     }
 
     @GetMapping("/participate/{surveyId}")
-    fun showParticipationView(@PathVariable surveyId: UUID): ModelAndView {
-        return showParticipationViewOf(surveyId)
+    fun showParticipationPage(@PathVariable surveyId: UUID): ModelAndView {
+        return showParticipationPageOf(surveyId)
     }
 
     @GetMapping("/participate")
-    fun showParticipationViewOf(@RequestParam surveyId: UUID): ModelAndView {
+    fun showParticipationPageOf(@RequestParam surveyId: UUID): ModelAndView {
         return try {
             loadParticipationPageOf(surveyId)
         } catch (exception: IllegalArgumentException) {
-            addErrorMessageToView(exception, showSurveyCreationView())
+            addErrorMessageToView(exception, showSurveyCreationPage())
         }
     }
 
@@ -88,7 +88,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
             participation(surveyId, surveyDTO)
             redirectToSharingPage(surveyId)
         } catch (exception: IllegalArgumentException) {
-            addErrorMessageToView(exception, showSurveyCreationView())
+            addErrorMessageToView(exception, showSurveyCreationPage())
         }
     }
 
