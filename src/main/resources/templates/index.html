@@ -19,8 +19,21 @@
     <link rel="stylesheet" href="../static/css/textField.css"/>
     <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
     <script type="text/javascript" src="../static/scripts/initialization.js"></script>
+    <script type="text/javascript" src="../static/scripts/errorBar.js"></script>
 </head>
 <body>
+<div id="errorBar" class="navbar-fixed wow fadeInDown" th:classappend="${errorBarShallBeVisible} ? '' : 'invisible' ">
+    <nav>
+        <div class="nav-wrapper red">
+            <ul>
+                <li class="left textTransformedAsWritten">Error:
+                    <span th:text="${errorMessage}"></span>
+                </li>
+                <li class="right"><a onclick="makeErrorBarInvisibleAgain()">Close</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
 <div id="fullscreenIntroduction" class="row fullHeight">
     <div class="col s12 m6 border heightOf100vh valign-wrapper whiteTriangleBackground">
         <div class="center-align alignWelcomeTextOnMobile fullWidthOfParent border">
