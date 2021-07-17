@@ -78,7 +78,7 @@
                         <input id="minimumParticipantsFields" th:field="*{minimumParticipants}" type="number"
                                class="validate left-align" minlength="2" min="2"
                                th:disabled="${intention} eq 'participateSurvey'"
-                               maxlength="50" required/>
+                               max="100" required/>
                         <label for="minimumParticipantsFields">Minimum participants</label>
                         <span class="helper-text" data-error="wrong format" data-success=""></span>
                     </div>
