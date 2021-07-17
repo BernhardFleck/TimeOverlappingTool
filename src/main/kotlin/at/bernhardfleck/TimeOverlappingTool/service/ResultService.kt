@@ -30,9 +30,7 @@ class ResultService {
         selectedDates.forEach { getItWhenMapContains(it)?.add(participant) }
     }
 
-    private fun getItWhenMapContains(
-        date: LocalDate,
-    ): MutableList<Participant>? {
+    private fun getItWhenMapContains(date: LocalDate): MutableList<Participant>? {
         return map.get(date)
     }
 }
