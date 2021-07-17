@@ -35,7 +35,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
         return try {
             createSurveyOf(surveyDTO)
         } catch (exception: IllegalArgumentException) {
-            addErrorMessageToView(exception, showSurveyCreationPage())
+            addErrorMessageToPage(exception, showSurveyCreationPage())
         }
     }
 
@@ -63,7 +63,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
         return try {
             loadParticipationPageOf(surveyId)
         } catch (exception: IllegalArgumentException) {
-            addErrorMessageToView(exception, showSurveyCreationPage())
+            addErrorMessageToPage(exception, showSurveyCreationPage())
         }
     }
 
@@ -88,7 +88,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
             participation(surveyId, surveyDTO)
             redirectToSharingPage(surveyId)
         } catch (exception: IllegalArgumentException) {
-            addErrorMessageToView(exception, showSurveyCreationPage())
+            addErrorMessageToPage(exception, showSurveyCreationPage())
         }
     }
 

@@ -31,7 +31,7 @@ class IndexController : BaseController() {
         return try {
             redirectionToSelectedView(surveyId, resultIsSelected)
         } catch (exception: Exception) {
-            addErrorMessageToView(exception, showIndexPage())
+            addErrorMessageToPage(exception, showIndexPage())
         }
     }
 
