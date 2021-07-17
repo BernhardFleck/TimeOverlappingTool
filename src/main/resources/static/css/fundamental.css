@@ -93,3 +93,7 @@ body, .uppercase {
 .biggerIcon {
     font-size: xx-large;
 }
+
+.invisible {
+    visibility: hidden !important;
+}
