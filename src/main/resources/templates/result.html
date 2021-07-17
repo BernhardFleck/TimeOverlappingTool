@@ -48,13 +48,22 @@
                     </div>
                     <div class="container textTransformedAsWritten">
                         <blockquote>
-                            <span th:text="*{purpose}">undefined</span>
-                            <div>
-                                You need at least
-                                <i th:text="*{minimumParticipants}">2</i>
-                                people for starting this event.
+                            <div class="left-align">
+                                <b th:text="*{purpose}">undefined</b>
+                                <div>
+                                    You need at least
+                                    <i th:text="*{minimumParticipants}">2</i>
+                                    people for starting this event.
+                                </div>
+                                See who has already participated:
                             </div>
-                            See who is already participating:
+                            <ul class="collection">
+                                <li th:each="participant : *{participants}"
+                                    th:text="${participant.firstName + ' ' + participant.lastName}"
+                                    class="collection-item">Max
+                                </li>
+                            </ul>
+                            <!-- TODO LIST ALL PARTICIPANTS (DISTINCT)                           -->
                         </blockquote>
                     </div>
                 </div>
