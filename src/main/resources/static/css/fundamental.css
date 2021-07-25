@@ -98,3 +98,7 @@ body, .uppercase {
     visibility: hidden !important;
     display: none !important;
 }
+
+.roundCorners{
+    border-radius: 25px;
+}
