@@ -73,8 +73,9 @@
                         </label>
                     </div>
                     <div class="input-field">
-                        <input id="surveyId" type="text" name="surveyId" class="validate center-align" minlength="36" maxlength="36" required/>
-<!-- TODO make this pattern work         pattern="[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}"-->
+                        <input id="surveyId" type="text" name="surveyId" class="validate center-align" minlength="36"
+                               maxlength="36" required/>
+                        <!-- TODO make this pattern work         pattern="[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}"-->
                         <label for="surveyId" class="textTransformedAsWritten">Enter the survey ID here</label>
                         <span class="helper-text" data-error="wrong format" data-success=""></span>
                     </div>
@@ -88,7 +89,6 @@
 </div>
 
 <div id="contact" class="row whiteBackground">
-<!--    todo resolve problem: email client on phone doesnt open    -->
     <div class="container black-text">
         <h4 class="center-align"><i class="material-icons biggerIcon">email</i>&nbsp;Contact</h4>
         <hr/>
@@ -126,19 +126,33 @@
                 </div>
                 <div class="input-field col s1">
                     <a class="tooltipped" data-position="left"
-                       data-tooltip="The format in your email client will be weird, but don't worry, just send it">
+                       data-tooltip="The format in your email client will look weird, but don't worry, just send it">
                         <i class="material-icons black-text">perm_device_information</i>
                     </a>
                 </div>
             </div>
 
-            <div class="row">
-                <button class="left btn waves-effect waves-light pulse mainColorDark" type="submit" name="action">Send
-                    <i class="material-icons right">send</i>
-                </button>
-                <button class="right btn waves-effect waves-light mainColorDark" type="reset" name="action">Reset
-                    <i class="material-icons right">delete_forever</i>
-                </button>
+            <div class="row center-align">
+                <div class="col s4">
+                    <button class="btn waves-effect waves-light pulse mainColorDark" type="submit" name="action">Send
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+                <div class="col s4">
+                    <a class="tooltipped" data-position="bottom"
+                       data-tooltip="Sending an email is only possible when an email client is already set up. There is also a high chance that it only works on a PC not on a mobile phone.">
+                        <i class="material-icons black-text">error_outline</i>
+                    </a>
+                    <a class="tooltipped" data-position="bottom"
+                       data-tooltip="You can still send me an email: bernhard-fleck@live.com">
+                        <i class="material-icons black-text">email</i>
+                    </a>
+                </div>
+                <div class="col s4">
+                    <button class="btn waves-effect waves-light mainColorDark" type="reset" name="action">Reset
+                        <i class="material-icons right">delete_forever</i>
+                    </button>
+                </div>
             </div>
         </form>
     </div>
