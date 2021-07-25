@@ -17,7 +17,7 @@ class ResultController(
 ) : BaseController() {
 
     @GetMapping("/survey/result/{surveyId}")
-    fun showResultView(@PathVariable surveyId: String): ModelAndView {
+    fun showResultView(@PathVariable(required = true) surveyId: String): ModelAndView {
         return try {
             showResultViewOf(surveyId)
         } catch (exception: IllegalArgumentException) {

@@ -19,3 +19,8 @@ spring:
       path: /anyPath
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+server:
+  error:
+    path: /error
+    whitelabel:
+      enabled: false

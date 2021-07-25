@@ -55,18 +55,17 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
     }
 
     @GetMapping("/participate/{surveyId}")
-    fun showParticipationPage(@PathVariable surveyId: UUID): ModelAndView {
+    fun showParticipationPage(@PathVariable(required = true) surveyId: UUID): ModelAndView {
         return try {
             showParticipationPageOf(surveyId)
         } catch (exception: MethodArgumentTypeMismatchException) {
             addErrorMessageToPage(exception, showSurveyCreationPage())
         }
     }
-    //TODO add global error page - handle org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
-    // because when the user types in anything else but a UUID in the URL it doesnt even go inside this method.
-
+//TODO adapt logging
+//TODO check if emojis break the system
     @GetMapping("/participate")
-    fun showParticipationPageOf(@RequestParam surveyId: UUID): ModelAndView {
+    fun showParticipationPageOf(@RequestParam(required = true) surveyId: UUID): ModelAndView {
         return try {
             loadParticipationPageOf(surveyId)
         } catch (exception: IllegalArgumentException) {
@@ -91,7 +90,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
     @PostMapping("/participate/{surveyId}")
     fun participateInSurvey(
         @ModelAttribute surveyDTO: SurveyDTO,
-        @PathVariable surveyId: String
+        @PathVariable(required = true) surveyId: String
     ): ModelAndView {
         return try {
             participation(surveyId, surveyDTO)

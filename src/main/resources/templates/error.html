@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SURVEYLI</title>
+    <!-- Todo make links static -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link type="text/css" rel="stylesheet" media="screen,projection"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/animate.css"/>
+    <!-- Todo make links runnable for spring "/css/mycss.css" -->
+    <link rel="stylesheet" href="../static/css/fundamental.css"/>
+    <link rel="stylesheet" href="../static/css/error.css"/>
+    <link rel="stylesheet" href="../static/css/survey.css"/>
+    <script type="text/javascript" src="../static/scripts/clipboard.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/initialization.js"></script>
+</head>
+<body class="blueTriangleBackground">
+<div id="content" class="row border fullHeight valign-wrapper wow fadeIn">
+    <div class="col s12 xl6 offset-xl3 card-panel thirdOfHeight valign-wrapper whiteBackground roundCorners border z-depth-4">
+        <div class="row fullWidthOfParent center-align">
+            <div>
+                <br/>
+                <i class="material-icons biggerIcon red-text">sentiment_very_dissatisfied thumb_down</i>
+                <h5>Heck No, you shouldn't be here!</h5>
+                <h6><i>What have you done ???</i></h6>
+                <hr/>
+            </div>
+            <div class="container textTransformedAsWritten">
+                <div class="row">
+                    <h2>
+                        <i class="material-icons biggerIcon red-text">error</i>
+                        <span th:text="${errorCode}">404</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <blockquote>
+                        <b th:text="${errorMessageShort}">This is a short description of the exception</b>
+                        <p th:text="${errorMessageDetailed}">This is a detailed description of the exception</p>
+                    </blockquote>
+                </div>
+                <br/>
+                <div class="row">
+                    <i>When you don't think that it was your fault, then please do not hesitate to contact me. Copy,
+                        paste the error message and describe me what you've done to end up with this error.</i>
+                    <p>
+                        The contact formular can be found here: <a href="index.html">Homepage</a>
+                        <br/>
+                        You can also send me an email directly to: <a href="mailto:bernhard-fleck@live.com">bernhard-fleck@live.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer" class="row page-footer darken-2 grey textTransformedAsWritten">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10">
+                <h6 class="white-text uppercase">
+                    <u>Cave</u>
+                </h6>
+                <p class="grey-text text-lighten-4 textTransformedAsWritten">
+                    For evaluating a survey personal data gets processed, especially your first name, last name and
+                    the
+                    selected dates where you are available for an event. With using this tool you agree that this
+                    data may be seen by other participants and in addition it may be stored permanently.
+                    Finished surveys will be deleted automatically at the day after the end of the survey,
+                    this does also include your personal data.
+                </p>
+            </div>
+            <div class="col s12 m2">
+                <h6 class="white-text uppercase"><u>Impressum</u></h6>
+                <ul>
+                    <li class="grey-text text-lighten-3">Bernhard Fleck</li>
+                    <li class="grey-text text-lighten-3">1210 Vienna</li>
+                    <li class="grey-text text-lighten-3">Austria</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <i class="grey-text text-lighten-4 left">&copy; 2021</i>
+            <i class="grey-text text-lighten-4 right">Thank you for using my tool. Feedback is
+                highly appreciated!</i>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>
