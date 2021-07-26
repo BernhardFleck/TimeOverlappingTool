@@ -1,7 +1,3 @@
-logging:
-  file:
-    path: .
-    name: application.log
 spring:
   output:
     ansi:

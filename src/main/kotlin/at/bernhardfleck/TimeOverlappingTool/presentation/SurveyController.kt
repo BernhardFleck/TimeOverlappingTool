@@ -62,7 +62,6 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
             addErrorMessageToPage(exception, showSurveyCreationPage())
         }
     }
-//TODO adapt logging
 //TODO check if emojis break the system
     @GetMapping("/participate")
     fun showParticipationPageOf(@RequestParam(required = true) surveyId: UUID): ModelAndView {
