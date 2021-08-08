@@ -1,6 +1,7 @@
 package at.bernhardfleck.TimeOverlappingTool.presentation.dto
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
+import at.bernhardfleck.TimeOverlappingTool.domain.SelectedDay
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
 
@@ -17,8 +18,7 @@ class SurveyDTO {
 
     var participant: Participant = Participant()
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    var selectedDates: List<LocalDate> = emptyList()
+    var selectedDays = mutableListOf<SelectedDayDTO>()
 
     constructor()
 
@@ -28,13 +28,13 @@ class SurveyDTO {
         endDate: LocalDate,
         minimumParticipantsForMatch: Int,
         participant: Participant,
-        selectedDates: List<LocalDate>
+        selectedDays: MutableList<SelectedDayDTO>
     ) {
         this.purpose = purpose
         this.startDate = startDate
         this.endDate = endDate
         this.minimumParticipants = minimumParticipantsForMatch
         this.participant = participant
-        this.selectedDates = selectedDates
+        this.selectedDays = selectedDays
     }
 }

@@ -2,7 +2,7 @@ package at.bernhardfleck.TimeOverlappingTool.presentation.dto
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
-import at.bernhardfleck.TimeOverlappingTool.presentation.helper.DatesCreator.Companion.datesFromStartToEndOf
+import at.bernhardfleck.TimeOverlappingTool.presentation.helper.DatesCreator.Companion.getDaysInRangeOf
 
 class DtoToEntityConverter {
 
@@ -25,7 +25,7 @@ class DtoToEntityConverter {
                 survey.endDate,
                 survey.minimumParticipants,
                 participant = Participant(),
-                selectedDates = datesFromStartToEndOf(survey)
+                selectedDays = getDaysInRangeOf(survey)
             )
         }
     }

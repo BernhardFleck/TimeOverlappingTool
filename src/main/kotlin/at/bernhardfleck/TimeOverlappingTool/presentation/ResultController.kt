@@ -29,11 +29,11 @@ class ResultController(
         val modelAndView = ModelAndView()
         val surveyId = UUID.fromString(surveyId)
         val survey = surveyService.getSurveyBy(surveyId)
-        val datesMappedToParticipants = resultService.getDatesMappedToParticipantsOf(survey)
+        val datesMappedToParticipants = resultService.getDaysMappedToParticipantsAndTheirNotesOf(survey)
 
         modelAndView.viewName = "result"
         modelAndView.addObject("survey", survey)
-        modelAndView.addObject("allDates", datesMappedToParticipants)
+        modelAndView.addObject("daysMappedToParticipantsAndTheirNotes", datesMappedToParticipants)
         return modelAndView
     }
 

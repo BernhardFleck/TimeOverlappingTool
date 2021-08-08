@@ -1,6 +1,7 @@
 package at.bernhardfleck.TimeOverlappingTool.service
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
+import at.bernhardfleck.TimeOverlappingTool.domain.SelectedDay
 import at.bernhardfleck.TimeOverlappingTool.domain.Submission
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
 import org.assertj.core.api.Assertions.assertThat
@@ -19,12 +20,16 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
         val john = Participant("John", "Doe")
         val jane = Participant("Jane", "Doe")
         val johnsSelectedDates = listOf(
-            LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20),
-            LocalDate.of(2021, 6, 25), LocalDate.of(2021, 6, 29)
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 20)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 25)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 29))
         )
         val janesSelectedDates = listOf(
-            LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 21),
-            LocalDate.of(2021, 6, 25), LocalDate.of(2021, 7, 2)
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 21)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 25)),
+            SelectedDay(note = "", LocalDate.of(2021, 7, 2))
         )
         val participants = mutableListOf(john, jane)
         val submissions = mutableListOf(
@@ -39,9 +44,9 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
             participants = participants,
             submissions = submissions
         )
-        val map: Map<LocalDate, MutableList<Participant>>
+        val map: Map<LocalDate, MutableMap<Participant, String>>
 
-        map = resultService.getDatesMappedToParticipantsOf(survey)
+        map = resultService.getDaysMappedToParticipantsAndTheirNotesOf(survey)
 
         assertThat(map.keys).hasSize(14)
         assertThat(map.keys).contains(
@@ -67,12 +72,16 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
         val john = Participant("John", "Doe")
         val jane = Participant("Jane", "Doe")
         val johnsSelectedDates = listOf(
-            LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20),
-            LocalDate.of(2021, 6, 25), LocalDate.of(2021, 6, 29)
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 20)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 25)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 29))
         )
         val janesSelectedDates = listOf(
-            LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 21),
-            LocalDate.of(2021, 6, 25), LocalDate.of(2021, 7, 2)
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 21)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 25)),
+            SelectedDay(note = "", LocalDate.of(2021, 7, 2))
         )
         val participants = mutableListOf(john, jane)
         val submissions = mutableListOf(
@@ -87,9 +96,9 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
             participants = participants,
             submissions = submissions
         )
-        val map: Map<LocalDate, MutableList<Participant>>
+        val map: Map<LocalDate, MutableMap<Participant, String>>
 
-        map = resultService.getDatesMappedToParticipantsOf(survey)
+        map = resultService.getDaysMappedToParticipantsAndTheirNotesOf(survey)
 
         assertThat(map.keys).doesNotContain(
             LocalDate.of(2021, 6, 18),
@@ -102,12 +111,16 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
         val john = Participant("John", "Doe")
         val jane = Participant("Jane", "Doe")
         val johnsSelectedDates = listOf(
-            LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20),
-            LocalDate.of(2021, 6, 25), LocalDate.of(2021, 6, 29)
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 20)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 25)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 29))
         )
         val janesSelectedDates = listOf(
-            LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 21),
-            LocalDate.of(2021, 6, 25), LocalDate.of(2021, 7, 2)
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 21)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 25)),
+            SelectedDay(note = "", LocalDate.of(2021, 7, 2))
         )
         val participants = mutableListOf(john, jane)
         val submissions = mutableListOf(
@@ -122,24 +135,24 @@ class ResultServiceTest(@Autowired val resultService: ResultService) {
             participants = participants,
             submissions = submissions
         )
-        val map: Map<LocalDate, MutableList<Participant>>
+        val map: Map<LocalDate, MutableMap<Participant, String>>
 
-        map = resultService.getDatesMappedToParticipantsOf(survey)
+        map = resultService.getDaysMappedToParticipantsAndTheirNotesOf(survey)
 
-        assertThat(map.get(LocalDate.of(2021, 6, 19))).contains(jane, john)
-        assertThat(map.get(LocalDate.of(2021, 6, 20))).contains(john)
-        assertThat(map.get(LocalDate.of(2021, 6, 21))).contains(jane)
+        assertThat(map.get(LocalDate.of(2021, 6, 19))).containsAllEntriesOf(mapOf(jane to "", john to ""))
+        assertThat(map.get(LocalDate.of(2021, 6, 20))).containsEntry(john, "")
+        assertThat(map.get(LocalDate.of(2021, 6, 21))).containsEntry(jane, "")
         assertThat(map.get(LocalDate.of(2021, 6, 22))).isEmpty()
         assertThat(map.get(LocalDate.of(2021, 6, 23))).isEmpty()
         assertThat(map.get(LocalDate.of(2021, 6, 24))).isEmpty()
-        assertThat(map.get(LocalDate.of(2021, 6, 25))).contains(jane, john)
+        assertThat(map.get(LocalDate.of(2021, 6, 25))).containsAllEntriesOf(mapOf(jane to "", john to ""))
         assertThat(map.get(LocalDate.of(2021, 6, 26))).isEmpty()
         assertThat(map.get(LocalDate.of(2021, 6, 27))).isEmpty()
         assertThat(map.get(LocalDate.of(2021, 6, 28))).isEmpty()
-        assertThat(map.get(LocalDate.of(2021, 6, 29))).contains(john)
+        assertThat(map.get(LocalDate.of(2021, 6, 29))).containsEntry(john, "")
         assertThat(map.get(LocalDate.of(2021, 6, 30))).isEmpty()
         assertThat(map.get(LocalDate.of(2021, 7, 1))).isEmpty()
-        assertThat(map.get(LocalDate.of(2021, 7, 2))).contains(jane)
+        assertThat(map.get(LocalDate.of(2021, 7, 2))).containsEntry(jane, "")
     }
 
 }

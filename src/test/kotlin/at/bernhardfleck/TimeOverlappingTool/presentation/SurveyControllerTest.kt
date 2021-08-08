@@ -1,6 +1,7 @@
 package at.bernhardfleck.TimeOverlappingTool.presentation
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
+import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SelectedDayDTO
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -24,11 +25,11 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
     fun `ensure that the list of dates passed to the view is not empty`() {
         val passedModelAndView: ModelAndView
         val passedDTO: SurveyDTO
-        val passedDates: List<LocalDate>
+        val passedDates: List<SelectedDayDTO>
 
         passedModelAndView = surveyController.showSurveyCreationPage()
         passedDTO = passedModelAndView.model.get("dto") as SurveyDTO
-        passedDates = passedDTO.selectedDates
+        passedDates = passedDTO.selectedDays
 
         assertThat(passedDates).isNotEmpty
     }
@@ -37,11 +38,11 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
     fun `ensure that the list of dates passed to the view contains 14 dates`() {
         val passedModelAndView: ModelAndView
         val passedDTO: SurveyDTO
-        val passedDates: List<LocalDate>
+        val passedDates: List<SelectedDayDTO>
 
         passedModelAndView = surveyController.showSurveyCreationPage()
         passedDTO = passedModelAndView.model.get("dto") as SurveyDTO
-        passedDates = passedDTO.selectedDates
+        passedDates = passedDTO.selectedDays
 
         assertThat(passedDates).hasSize(14)
     }
@@ -56,7 +57,10 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("John", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20))
+            )
         )
 
         modelAndView = surveyController.createSurvey(surveyDTO)
@@ -73,7 +77,10 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("John", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20))
+            )
         )
         var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
@@ -93,7 +100,10 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("John", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20))
+            )
         )
         var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
@@ -101,21 +111,22 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         modelAndView = surveyController.showParticipationPageOf(surveyId)
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
 
-        assertThat(surveyDTO.selectedDates).contains(
-            LocalDate.of(2021, 6, 19),
-            LocalDate.of(2021, 6, 20),
-            LocalDate.of(2021, 6, 21),
-            LocalDate.of(2021, 6, 22),
-            LocalDate.of(2021, 6, 23),
-            LocalDate.of(2021, 6, 24),
-            LocalDate.of(2021, 6, 25),
-            LocalDate.of(2021, 6, 26),
-            LocalDate.of(2021, 6, 27),
-            LocalDate.of(2021, 6, 28),
-            LocalDate.of(2021, 6, 29),
-            LocalDate.of(2021, 6, 30),
-            LocalDate.of(2021, 7, 1),
-            LocalDate.of(2021, 7, 2),
+        assertThat(surveyDTO.selectedDays).contains(
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 21)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 22)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 23)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 24)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 25)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 26)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 27)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 28)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 29)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 30)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 1)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 1)),
+            SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 2))
         )
     }
 
@@ -127,15 +138,20 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("John", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20))
+            )
         )
         var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
+        val selectedDates: List<LocalDate>
 
         modelAndView = surveyController.showParticipationPageOf(surveyId)
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
+        selectedDates = surveyDTO.selectedDays.map { it.date!! }
 
-        assertThat(surveyDTO.selectedDates.minOrNull()).isEqualTo(LocalDate.of(2021, 6, 19))
+        assertThat(selectedDates.minOrNull()).isEqualTo(LocalDate.of(2021, 6, 19))
     }
 
     @Test
@@ -146,15 +162,20 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("John", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20))
+            )
         )
         var modelAndView = surveyController.createSurvey(surveyDTO)
         val surveyId = modelAndView.model.get("surveyId") as UUID
+        val selectedDates: List<LocalDate>
 
         modelAndView = surveyController.showParticipationPageOf(surveyId)
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
+        selectedDates = surveyDTO.selectedDays.map { it.date!! }
 
-        assertThat(surveyDTO.selectedDates.maxOrNull()).isEqualTo(LocalDate.of(2021, 7, 2))
+        assertThat(selectedDates.maxOrNull()).isEqualTo(LocalDate.of(2021, 7, 2))
     }
 
     @Test
@@ -166,7 +187,10 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("John", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20))
+            )
         )
         val dtoFromParticipant = SurveyDTO(
             purpose = "SoccerNight",
@@ -174,7 +198,10 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
             startDate = LocalDate.of(2021, 6, 19),
             endDate = LocalDate.of(2021, 7, 2),
             participant = Participant("Jane", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20))
+            )
         )
         val modelAndView = surveyController.createSurvey(dtoFromCreator)
         val surveyId = modelAndView.model.get("surveyId") as UUID

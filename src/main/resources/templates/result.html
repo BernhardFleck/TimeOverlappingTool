@@ -13,12 +13,12 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Todo make links runnable for spring "/css/mycss.css" -->
-    <link rel="stylesheet" href="../static/css/animate.css"/>
-    <link rel="stylesheet" href="../static/css/fundamental.css"/>
-    <link rel="stylesheet" href="../static/css/result.css"/>
-    <script type="text/javascript" src="../static/scripts/clipboard.min.js"></script>
-    <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
-    <script type="text/javascript" src="../static/scripts/initialization.js"></script>
+    <link rel="stylesheet" href="/css/animate.css"/>
+    <link rel="stylesheet" href="/css/fundamental.css"/>
+    <link rel="stylesheet" href="/css/result.css"/>
+    <script type="text/javascript" src="/scripts/clipboard.min.js"></script>
+    <script type="text/javascript" src="/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="/scripts/initialization.js"></script>
 </head>
 <body>
 
@@ -26,7 +26,7 @@
     <div id="surveyDetails" class="col s12 m4 border whiteTriangleBackground fullWidthOfParent">
         <div class="center-align alignWelcomeTextOnMobile border stickyInParent">
             <div class="wow fadeInDown border">
-                <img class="responsive-img" alt="" src="../static/images/surveyWithMargin.png"/>
+                <img class="responsive-img" alt="" src="/images/surveyWithMargin.png"/>
                 <h3>Surveyli</h3>
                 <i>Your tiny tool for sharing surveys with your friends.</i>
                 <div class="row fullWidthOfParent" th:object="${survey}">
@@ -71,23 +71,31 @@
     </div>
     <div id="cards" class="col s12 m8 border valign-wrapper blueTriangleBackground">
         <div class="alignCardsOnMobile cardContainer fullWidthOfParent border wow fadeInUp">
-            <div th:each="entry : ${allDates}" class="cardItem">
+            <div th:each="map1 : ${daysMappedToParticipantsAndTheirNotes}" class="cardItem">
                 <div class="card hoverable grey lighten-5 black-text">
                     <div class="card-content">
                         <p class="card-title">
-                            <span th:text="${ #temporals.format(entry.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
-                            <span th:class="${ #lists.size(entry.value) >= survey.minimumParticipants} ? 'badge green-text' : 'badge red-text'"
+                            <span th:text="${ #temporals.format(map1.key, 'E dd.MM') + ':'}">Date</span>&nbsp;
+                            <span th:class="${ #maps.size(map1.value) >= survey.minimumParticipants} ? 'badge green-text' : 'badge red-text'"
                                   class="badge">
-                            <b th:text="${'#' + #lists.size(entry.value)}">#0</b>
+                            <b th:text="${'#' + #maps.size(map1.value)}">#0</b>
                         </span>
                         </p>
                         <ul>
-                            <li th:each="participant : ${entry.value}" class="chip"
-                                th:text="${participant.firstName + ' ' + #strings.substring(participant.lastName, 0, 1) + '.'}">
+                            <li th:each="map2 : ${map1.value}" class="chip"
+                                th:text="${map2.key.firstName + ' ' + #strings.substring(map2.key.lastName, 0, 1) + '.'}">
                                 Participant
                             </li>
-                            <li th:if="${ #lists.size(entry.value) == 0 }">
+                            <li th:if="${ #maps.size(map1.value) == 0 }">
                                 <i>No Participants</i>
+                            </li>
+                        </ul>
+                        <hr/>
+                        <ul>
+                            <li th:each="map2 : ${map1.value}" class="chip"
+                                th:unless="${#strings.isEmpty(map2.value)}"
+                                th:text="${map2.value}">
+                                Note
                             </li>
                         </ul>
                     </div>

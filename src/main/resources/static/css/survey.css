@@ -1,0 +1,8 @@
+.selectedDate {
+    background-color: #DAFFD7;
+    font-weight: bold;
+}
+
+.collapsible-header {
+    justify-content: space-between !important;
+}

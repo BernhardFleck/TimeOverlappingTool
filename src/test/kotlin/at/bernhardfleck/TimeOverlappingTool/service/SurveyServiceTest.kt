@@ -1,8 +1,10 @@
 package at.bernhardfleck.TimeOverlappingTool.service
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
+import at.bernhardfleck.TimeOverlappingTool.domain.SelectedDay
 import at.bernhardfleck.TimeOverlappingTool.domain.Submission
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
+import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SelectedDayDTO
 import at.bernhardfleck.TimeOverlappingTool.presentation.helper.DatesCreator.Companion.getNextTwoWeeks
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -20,26 +22,26 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
     fun `ensure list of the next two weeks starts with tomorrow`() {
         val now = now()
         val tomorrow = now.plusDays(1)
-        val datesOfNextTwoWeeks: List<LocalDate>
-        val firstDate: LocalDate
+        val datesOfNextTwoWeeks: List<SelectedDayDTO>
+        val firstDay: LocalDate
 
         datesOfNextTwoWeeks = getNextTwoWeeks()
-        firstDate = datesOfNextTwoWeeks.get(0)
+        firstDay = datesOfNextTwoWeeks.get(0).date!!
 
-        assertThat(firstDate).isEqualTo(tomorrow)
+        assertThat(firstDay).isEqualTo(tomorrow)
     }
 
     @Test
     fun `ensure list of the next two weeks ends with today plus 14 days`() {
         val tomorrow = now().plusDays(1)
         val expectedEnd = tomorrow.plusDays(13) // because 14th day is exlusive
-        val datesOfNextTwoWeeks: List<LocalDate>
+        val datesOfNextTwoWeeks: List<SelectedDayDTO>
         val lastDate: LocalDate
         val lastIndex: Int
 
         datesOfNextTwoWeeks = getNextTwoWeeks()
         lastIndex = datesOfNextTwoWeeks.size - 1
-        lastDate = datesOfNextTwoWeeks.get(lastIndex)
+        lastDate = datesOfNextTwoWeeks.get(lastIndex).date!!
 
         assertThat(lastDate).isEqualTo(expectedEnd)
     }
@@ -53,8 +55,10 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
         val selectedDates = listOf(
-            LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20),
-            LocalDate.of(2021, 6, 25), LocalDate.of(2021, 6, 29)
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 20)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 25)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 29))
         )
         val creator = Participant(firstName, lastName)
         val participants = mutableListOf(creator)
@@ -78,13 +82,19 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
         val creator = Participant("John", "Doe")
-        val creatorsSelectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+        val creatorsSelectedDates = listOf(
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 20))
+        )
         val creatorsSubmission = Submission(creator, creatorsSelectedDates)
         val participants = mutableListOf(creator)
         val submissions = mutableListOf(creatorsSubmission)
         var survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
         val participant = Participant("Jane", "Doe")
-        val participantsSelectedDates = listOf(LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+        val participantsSelectedDates = listOf(
+            SelectedDay(note = "", LocalDate.of(2021, 6, 20)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 21))
+        )
         val participantsSubmission = Submission(participant, participantsSelectedDates)
 
         survey.validate()
@@ -103,13 +113,20 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
         val creator = Participant("John", "Doe")
-        val creatorsSelectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20))
+        val creatorsSelectedDates = listOf(
+            SelectedDay(note = "", LocalDate.of(2021, 6, 19)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 20))
+        )
         val creatorsSubmission = Submission(creator, creatorsSelectedDates)
         val participants = mutableListOf(creator)
         val submissions = mutableListOf(creatorsSubmission)
         var survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
         val participant = Participant("Jane", "Doe")
-        val participantsSelectedDates = listOf(LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+        val participantsSelectedDates = listOf(
+            SelectedDay(note = "", LocalDate.of(2021, 6, 20)),
+            SelectedDay(note = "", LocalDate.of(2021, 6, 21))
+        )
+
         val participantsSubmission = Submission(participant, participantsSelectedDates)
 
         survey.validate()

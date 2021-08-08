@@ -34,7 +34,7 @@ data class Survey(
         participants.forEach { it.validate() }
         submissions.ifEmpty { throw IllegalArgumentException("creating a survey where no submission was made should be impossible") }
         submissions.forEach {
-            it.selectedDates.ifEmpty { throw IllegalArgumentException("creating a survey without selecting dates is pointless") }
+            it.selectedDays.ifEmpty { throw IllegalArgumentException("creating a survey without selecting dates is pointless") }
         }
     }
 }

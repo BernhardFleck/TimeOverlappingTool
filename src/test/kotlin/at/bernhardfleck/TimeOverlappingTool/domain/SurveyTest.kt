@@ -18,10 +18,10 @@ class SurveyTest {
         val minimumParticipantsForMatch = 5
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDays = listOf(SelectedDay(note = "", LocalDate.of(2021, 6, 20)))
         val creator = Participant(firstName, lastName)
         val participants = mutableListOf(creator)
-        val submission = Submission(creator, selectedDates)
+        val submission = Submission(creator, selectedDays)
         val submissions = mutableListOf(submission)
         val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
@@ -38,10 +38,10 @@ class SurveyTest {
         val minimumParticipantsForMatch = 5
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDays = listOf(SelectedDay(note = "", LocalDate.of(2021, 6, 20)))
         val creator = Participant(firstName, lastName)
         val participants = mutableListOf(creator)
-        val submission = Submission(creator, selectedDates)
+        val submission = Submission(creator, selectedDays)
         val submissions = mutableListOf(submission)
         val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
@@ -58,10 +58,10 @@ class SurveyTest {
         val minimumParticipantsForMatch = -1
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDays = listOf(SelectedDay(note = "", LocalDate.of(2021, 6, 20)))
         val creator = Participant(firstName, lastName)
         val participants = mutableListOf(creator)
-        val submission = Submission(creator, selectedDates)
+        val submission = Submission(creator, selectedDays)
         val submissions = mutableListOf(submission)
         val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
@@ -78,10 +78,10 @@ class SurveyTest {
         val minimumParticipantsForMatch = 0
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDays = listOf(SelectedDay(note = "", LocalDate.of(2021, 6, 20)))
         val creator = Participant(firstName, lastName)
         val participants = mutableListOf(creator)
-        val submission = Submission(creator, selectedDates)
+        val submission = Submission(creator, selectedDays)
         val submissions = mutableListOf(submission)
         val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
@@ -98,10 +98,10 @@ class SurveyTest {
         val minimumParticipantsForMatch = 1
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDays = listOf(SelectedDay(note = "", LocalDate.of(2021, 6, 20)))
         val creator = Participant(firstName, lastName)
         val participants = mutableListOf(creator)
-        val submission = Submission(creator, selectedDates)
+        val submission = Submission(creator, selectedDays)
         val submissions = mutableListOf(submission)
         val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
@@ -116,9 +116,9 @@ class SurveyTest {
         val minimumParticipantsForMatch = 5
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val selectedDates = listOf(LocalDate.of(2021, 6, 20))
+        val selectedDays = listOf(SelectedDay(note = "", LocalDate.of(2021, 6, 20)))
         val participants = mutableListOf<Participant>()
-        val submission = Submission(Participant(), selectedDates)
+        val submission = Submission(Participant(), selectedDays)
         val submissions = mutableListOf(submission)
         val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 
@@ -135,10 +135,10 @@ class SurveyTest {
         val minimumParticipantsForMatch = 2
         val startDate = LocalDate.of(2021, 6, 19)
         val endDate = LocalDate.of(2021, 7, 3)
-        val selectedDates = emptyList<LocalDate>()
+        val selectedDays = emptyList<SelectedDay>()
         val creator = Participant(firstName, lastName)
         val participants = mutableListOf(creator)
-        val submission = Submission(creator, selectedDates)
+        val submission = Submission(creator, selectedDays)
         val submissions = mutableListOf(submission)
         val survey = Survey(purpose, startDate, endDate, minimumParticipantsForMatch, participants, submissions)
 

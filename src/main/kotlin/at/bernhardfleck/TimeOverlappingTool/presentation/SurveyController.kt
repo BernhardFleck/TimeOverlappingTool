@@ -24,7 +24,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
         val surveyDTO = SurveyDTO()
         val datesOfNextTwoWeeks = getNextTwoWeeks()
 
-        surveyDTO.selectedDates = datesOfNextTwoWeeks
+        surveyDTO.selectedDays = datesOfNextTwoWeeks
         modelAndView.viewName = surveyViewName
         modelAndView.addObject("dto", surveyDTO)
         modelAndView.addObject("intention", "createSurvey")
@@ -62,7 +62,8 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
             addErrorMessageToPage(exception, showSurveyCreationPage())
         }
     }
-//TODO check if emojis break the system
+
+    //TODO check if emojis break the system
     @GetMapping("/participate")
     fun showParticipationPageOf(@RequestParam(required = true) surveyId: UUID): ModelAndView {
         return try {

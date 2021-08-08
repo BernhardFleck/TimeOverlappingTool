@@ -2,36 +2,43 @@ package at.bernhardfleck.TimeOverlappingTool.presentation.helper
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.domain.Survey
+import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SelectedDayDTO
 import java.time.LocalDate
 import java.time.LocalDate.now
-import java.util.stream.Collectors
-import java.util.stream.Collectors.toList
+import kotlin.streams.toList
 
 class DatesCreator {
 
     companion object {
-        fun getNextTwoWeeks(): List<LocalDate> {
+        fun getNextTwoWeeks(): MutableList<SelectedDayDTO> {
             val tomorrow = now().plusDays(1)
             val fourteenDaysLater = tomorrow.plusDays(14)
-
-            return tomorrow
+            val nextTwoWeekDates = tomorrow
                 .datesUntil(fourteenDaysLater)
-                .collect(Collectors.toList())
+                .toList()
+
+            return nextTwoWeekDates
+                .map { SelectedDayDTO(it, "") }
+                .toMutableList()
         }
 
-        fun datesFromStartToEndOf(survey: Survey): List<LocalDate> {
+        fun emptyParticipantsAndNotesMappedToDaysOf(survey: Survey): Map<LocalDate, MutableMap<Participant, String>> {
+            return daysFromStartToEndOf(survey)
+                .map { it to mutableMapOf<Participant, String>() }
+                .toMap()
+        }
+
+        fun daysFromStartToEndOf(survey: Survey): List<LocalDate> {
             val start = survey.startDate
             val end = survey.endDate
             val endInclusive = end.plusDays(1)
 
-            return start.datesUntil(endInclusive)
-                .collect(toList())
+            return start.datesUntil(endInclusive).toList()
         }
 
-        fun emptyParticipantsMappedToDatesOf(survey: Survey): Map<LocalDate, MutableList<Participant>> {
-            return datesFromStartToEndOf(survey)
-                .map { it to mutableListOf<Participant>() }
-                .toMap()
-        }
+        fun getDaysInRangeOf(survey: Survey): MutableList<SelectedDayDTO> =
+            daysFromStartToEndOf(survey)
+                .map { SelectedDayDTO(note = "", date = it) }
+                .toMutableList()
     }
 }

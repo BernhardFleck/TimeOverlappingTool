@@ -10,7 +10,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link type="text/css" rel="stylesheet" media="screen,projection"
-          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+          href="../static/css/adapted_materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/animate.css"/>
     <!-- Todo make links runnable for spring "/css/mycss.css" -->
@@ -20,6 +20,7 @@
     <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
     <script type="text/javascript" src="../static/scripts/initialization.js"></script>
     <script type="text/javascript" src="../static/scripts/errorBar.js"></script>
+    <script type="text/javascript" src="../static/scripts/dateSelection.js"></script>
 </head>
 <body class="blueTriangleBackground">
 <div id="errorBar" class="navbar-fixed wow fadeInDown" th:classappend="${errorBarShallBeVisible} ? '' : 'invisible' ">
@@ -84,18 +85,53 @@
                     </div>
                 </fieldset>
                 <div class="row border">
-                    <h6><b>When do you have time?</b></h6>
                     <div class="row">
-                        <div class="col s4 m3 l2 xl2 border" th:each="date, status : *{selectedDates}">
-                            <label>
-                                <input type="checkbox" th:name="selectedDates" th:value="${date}"
-                                       th:id="date + ${status.index}"/>
-                                <span th:text="${#temporals.format(date, 'dd.MM')}">27.06</span>
-                                <input th:if="${status.first}" type="hidden" th:name="startDate"
-                                       th:value="${date}"/>
-                                <input th:if="${status.last}" type="hidden" th:name="endDate" th:value="${date}"/>
-                            </label>
-                        </div>
+                        <h6><b>When do you have time?</b></h6>
+                        <ul class="collapsible popout">
+                            <li th:each="selectedDay, status : *{selectedDays}">
+                                <div class="collapsible-header" id="rowHeader"
+                                     th:id="rowHeader + ${status.index}">
+                                    <div class="left">
+                                        <p>
+                                            <label>
+                                                <input type="checkbox" onclick="basedOnSelectionColorize('rowHeader')"
+                                                       th:attr="onclick=|basedOnSelectionColorize('${ 'rowHeader' + status.index}')|"
+                                                       th:name="*{ 'selectedDays[' + __${status.index}__ + '].date'}"
+                                                       th:value="*{selectedDays[__${status.index}__].date}"
+                                                />
+                                                <span class="black-text"
+                                                      th:text="${#temporals.format(selectedDay.date, 'dd.MM')}">27.06</span>
+                                            </label>
+                                        </p>
+
+                                        <label>
+                                            <input th:if="${status.first}" type="hidden"
+                                                   th:name="startDate"
+                                                   th:value="${selectedDay.date}"/>
+                                        </label>
+                                        <label>
+                                            <input th:if="${status.last}" type="hidden"
+                                                   th:name="endDate"
+                                                   th:value="${selectedDay.date}"/>
+
+                                        </label>
+                                    </div>
+                                    <div class="right valign-wrapper">
+                                        <span><i class="material-icons black-text">note_add</i></span>
+                                    </div>
+                                </div>
+                                <div class="collapsible-body">
+                                    <div class="input-field">
+                                        <input id="noteField"
+                                               th:id="note + ${status.index}"
+                                               th:field="${dto.selectedDays[__${status.index}__].note}"
+                                               type="text"
+                                               maxlength="20"/>
+                                        <label for="noteField" th:for="note + ${status.index}">Note</label>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="row border">

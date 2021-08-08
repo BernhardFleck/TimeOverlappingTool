@@ -2,6 +2,7 @@ package at.bernhardfleck.TimeOverlappingTool
 
 import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.presentation.SurveyController
+import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SelectedDayDTO
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
@@ -17,23 +18,26 @@ class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyCont
 
     //TODO Delete init data
     override fun run(vararg args: String?) {
-        val tomorrow = now().plusDays(1)
-        val fourteenDaysLater = tomorrow.plusDays(14)
+        val tomorrowDate = now().plusDays(1)
+        val fourteenDaysLaterDate = tomorrowDate.plusDays(14)
+        val tomorrow = SelectedDayDTO(note = "Afternoon only", date = tomorrowDate)
+        val fourteenDaysLater = SelectedDayDTO(note = "After 17:00", date = fourteenDaysLaterDate)
+
         val dtoForCreation = SurveyDTO(
             purpose = "SoccerNight",
             minimumParticipantsForMatch = 2,
-            startDate = tomorrow,
-            endDate = fourteenDaysLater,
+            startDate = tomorrowDate,
+            endDate = fourteenDaysLaterDate,
             participant = Participant("Jane", "Doe"),
-            selectedDates = listOf(tomorrow)
+            selectedDays = mutableListOf(tomorrow)
         )
         val dtoForParticipation = SurveyDTO(
             purpose = "SoccerNight",
             minimumParticipantsForMatch = 2,
-            startDate = tomorrow,
-            endDate = fourteenDaysLater,
+            startDate = tomorrowDate,
+            endDate = fourteenDaysLaterDate,
             participant = Participant("John", "Doe"),
-            selectedDates = listOf(tomorrow, fourteenDaysLater)
+            selectedDays = mutableListOf(tomorrow, fourteenDaysLater)
         )
 
         val modelAndView = surveyController.createSurvey(dtoForCreation)
@@ -50,7 +54,11 @@ class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyCont
             startDate = now().minusDays(13),
             endDate = now(),
             participant = Participant("Jane", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 21)),
+            )
         )
         val finishedDto = SurveyDTO(
             purpose = "SoccerNight",
@@ -58,7 +66,11 @@ class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyCont
             startDate = now().minusDays(14),
             endDate = now().minusDays(1),
             participant = Participant("Jane", "Doe"),
-            selectedDates = listOf(LocalDate.of(2021, 6, 19), LocalDate.of(2021, 6, 20), LocalDate.of(2021, 6, 21))
+            selectedDays = mutableListOf(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 21)),
+            )
         )
         surveyController.createSurvey(finishingDto)
         surveyController.createSurvey(finishedDto)
