@@ -4,6 +4,7 @@ import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SelectedDayDTO
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import org.assertj.core.api.Assertions.assertThat
+import org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -11,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.web.servlet.ModelAndView
 import java.time.LocalDate
 import java.util.*
+import org.hamcrest.MatcherAssert.assertThat as hamcrestAssertsThat
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -111,22 +113,25 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         modelAndView = surveyController.showParticipationPageOf(surveyId)
         surveyDTO = modelAndView.model.get("dto") as SurveyDTO
 
-        assertThat(surveyDTO.selectedDays).contains(
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 21)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 22)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 23)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 24)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 25)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 26)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 27)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 28)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 29)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 30)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 1)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 1)),
-            SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 2))
+        hamcrestAssertsThat(
+            surveyDTO.selectedDays, containsInAnyOrder(
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 21)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 22)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 23)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 24)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 25)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 26)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 27)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 28)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 29)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 30)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 1)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 1)),
+                SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 2))
+            )
         )
     }
 
