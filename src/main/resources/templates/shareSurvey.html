@@ -57,13 +57,12 @@
                 </div>
                 <p>It is even easier when you send them the following link which redirects directly to your survey:</p>
                 <div class="row">
-                    <a id="link" th:href="@{'/survey/participate/' + ${surveyId}}"
-                       th:text="@{'/survey/participate/' + ${surveyId}}"> <!--todo domain name has to be added!-->
+                    <a id="participationLink" th:href="@{'/survey/participate/' + ${surveyId}}">
                         Sorry, I guess your number was lost during the process. Try it again or contact the owner of the
                         website.
                     </a>
                     <button class="right btn waves-effect waves-light mainColorDark clipboardBtn"
-                            data-clipboard-target="#link">Copy
+                            data-clipboard-target="#participationLink">Copy
                         <i class="material-icons right">content_copy</i>
                     </button>
                 </div>
@@ -108,6 +107,6 @@
     </div>
 </footer>
 
-
+<script type="text/javascript" src="/scripts/participationLinkCreator.js"></script>
 </body>
 </html>
