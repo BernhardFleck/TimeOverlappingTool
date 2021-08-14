@@ -45,7 +45,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
         val submission = service.getSubmissionFrom(surveyDTO)
         var survey = convert(surveyDTO)
 
-        survey = service.participation(survey, submission)
+        service.participation(survey, submission)
         survey.validate()
         survey = service.save(survey)
 
@@ -106,6 +106,7 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
 
         submission.validate()
         service.participation(survey, submission)
+        service.save(survey)
     }
 
     private fun redirectToSharingPage(surveyId: String): ModelAndView {

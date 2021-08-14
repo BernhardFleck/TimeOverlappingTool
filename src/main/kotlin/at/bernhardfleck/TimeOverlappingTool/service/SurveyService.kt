@@ -34,12 +34,11 @@ class SurveyService(@Autowired private val surveyRepository: SurveyRepository) {
             .map { SelectedDay(it.note, it.date!!) }
             .toList()
 
-    fun participation(survey: Survey, submission: Submission): Survey {
+    fun participation(survey: Survey, submission: Submission) {
         val participant = submission.participant
 
         add(submission, survey)
         add(participant, survey)
-        return save(survey)
     }
 
     fun add(submission: Submission, survey: Survey) {

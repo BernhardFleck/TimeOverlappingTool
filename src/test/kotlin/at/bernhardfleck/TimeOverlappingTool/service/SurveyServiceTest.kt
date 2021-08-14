@@ -101,7 +101,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         creatorsSubmission.validate()
         participantsSubmission.validate()
         survey = surveyService.save(survey)
-        survey = surveyService.participation(survey, participantsSubmission)
+        surveyService.participation(survey, participantsSubmission)
 
         assertThat(survey.submissions).hasSize(2)
     }
@@ -133,7 +133,7 @@ class SurveyServiceTest(@Autowired val surveyService: SurveyService) {
         creatorsSubmission.validate()
         participantsSubmission.validate()
         survey = surveyService.save(survey)
-        survey = surveyService.participation(survey, participantsSubmission)
+        surveyService.participation(survey, participantsSubmission)
 
         assertThat(survey.submissions).hasSize(2)
     }
