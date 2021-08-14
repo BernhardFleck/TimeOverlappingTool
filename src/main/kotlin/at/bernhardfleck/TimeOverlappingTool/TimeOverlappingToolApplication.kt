@@ -12,11 +12,9 @@ import java.time.LocalDate
 import java.time.LocalDate.now
 import java.util.*
 
-
 @SpringBootApplication
 class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyController) : CommandLineRunner {
 
-    //TODO Delete init data
     override fun run(vararg args: String?) {
         val tomorrowDate = now().plusDays(1)
         val fourteenDaysLaterDate = tomorrowDate.plusDays(14)
