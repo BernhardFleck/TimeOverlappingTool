@@ -63,7 +63,6 @@ class SurveyController(@Autowired val service: SurveyService) : BaseController()
         }
     }
 
-    //TODO check if emojis break the system
     @GetMapping("/participate")
     fun showParticipationPageOf(@RequestParam(required = true) surveyId: UUID): ModelAndView {
         return try {

@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>SURVEYLI</title>
-    <!-- Todo make links static -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link type="text/css" rel="stylesheet" media="screen,projection"
-          href="../static/css/adapted_materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/animate.css"/>
-    <!-- Todo make links runnable for spring "/css/mycss.css" -->
-    <link rel="stylesheet" href="../static/css/fundamental.css"/>
-    <link rel="stylesheet" href="../static/css/survey.css"/>
-    <link rel="stylesheet" href="../static/css/textField.css"/>
-    <script type="text/javascript" src="../static/scripts/wow.min.js"></script>
-    <script type="text/javascript" src="../static/scripts/initialization.js"></script>
-    <script type="text/javascript" src="../static/scripts/errorBar.js"></script>
-    <script type="text/javascript" src="../static/scripts/dateSelection.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/materialize.min.js"></script>
+    <script type="text/javascript" src="/scripts/wow.min.js"></script>
+    <script type="text/javascript" src="/scripts/initialization.js"></script>
+    <script type="text/javascript" src="/scripts/errorBar.js"></script>
+    <script type="text/javascript" src="/scripts/dateSelection.js"></script>
+
+    <link type="text/css" rel="stylesheet" media="screen,projection" href="/css/adapted_materialize.min.css">
+    <link type="text/css" rel="stylesheet" href="/css/material_icons.css">
+    <link type="text/css" rel="stylesheet" href="/css/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/fundamental.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/survey.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/textField.css"/>
+
 </head>
 <body class="blueTriangleBackground">
 <div id="errorBar" class="navbar-fixed wow fadeInDown" th:classappend="${errorBarShallBeVisible} ? '' : 'invisible' ">
