@@ -4,7 +4,6 @@ import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SelectedDayDTO
 import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import org.assertj.core.api.Assertions.assertThat
-import org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -12,7 +11,6 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.web.servlet.ModelAndView
 import java.time.LocalDate
 import java.util.*
-import org.hamcrest.MatcherAssert.assertThat as hamcrestAssertsThat
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -93,48 +91,7 @@ class SurveyControllerTest(@Autowired val surveyController: SurveyController) {
         assertThat(surveyDTO.purpose).isEqualTo("SoccerNight")
         assertThat(surveyDTO.minimumParticipants).isEqualTo(5)
     }
-
-    @Test
-    fun `ensure sharing a participation link returns the dates from start to end of the survey`() {
-        var surveyDTO = SurveyDTO(
-            purpose = "SoccerNight",
-            minimumParticipantsForMatch = 5,
-            startDate = LocalDate.of(2021, 6, 19),
-            endDate = LocalDate.of(2021, 7, 2),
-            participant = Participant("John", "Doe"),
-            selectedDays = mutableListOf(
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20))
-            )
-        )
-        var modelAndView = surveyController.createSurvey(surveyDTO)
-        val surveyId = modelAndView.model.get("surveyId") as UUID
-
-        modelAndView = surveyController.showParticipationPageOf(surveyId)
-        surveyDTO = modelAndView.model.get("dto") as SurveyDTO
-
-        hamcrestAssertsThat(
-            surveyDTO.selectedDays, containsInAnyOrder(
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 19)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 20)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 21)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 22)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 23)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 24)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 25)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 26)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 27)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 28)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 29)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 6, 30)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 1)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 1)),
-                SelectedDayDTO(note = "", date = LocalDate.of(2021, 7, 2))
-            )
-        )
-    }
-
+    
     @Test
     fun `ensure that the lowest date to select of a shared survey is the start date`() {
         var surveyDTO = SurveyDTO(
