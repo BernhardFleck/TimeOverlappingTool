@@ -30,3 +30,4 @@ target/
 src/main/resources/application.yml
 *.png
 *.gz
+surveyDB.mv.db
