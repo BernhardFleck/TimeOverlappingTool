@@ -1,21 +1,16 @@
 package at.bernhardfleck.TimeOverlappingTool
 
-import at.bernhardfleck.TimeOverlappingTool.domain.Participant
 import at.bernhardfleck.TimeOverlappingTool.presentation.SurveyController
-import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SelectedDayDTO
-import at.bernhardfleck.TimeOverlappingTool.presentation.dto.SurveyDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import java.time.LocalDate
-import java.time.LocalDate.now
-import java.util.*
 
 @SpringBootApplication
 class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyController) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
+        /*
         val tomorrowDate = now().plusDays(1)
         val fourteenDaysLaterDate = tomorrowDate.plusDays(14)
         val tomorrow = SelectedDayDTO(note = "Afternoon only", date = tomorrowDate)
@@ -72,7 +67,7 @@ class TimeOverlappingToolApplication(@Autowired val surveyController: SurveyCont
         )
         surveyController.createSurvey(finishingDto)
         surveyController.createSurvey(finishedDto)
-
+*/
     }
 }
 
