@@ -8,8 +8,10 @@ import javax.persistence.CascadeType.ALL
 import javax.persistence.Entity
 import javax.persistence.OneToMany
 import javax.persistence.OneToOne
+import javax.persistence.Table
 
 @Entity
+@Table
 data class Submission(
     @OneToOne
     var participant: Participant,

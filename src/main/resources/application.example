@@ -5,7 +5,7 @@ spring:
   integration:
     pollingRateInMilliSec: 3600000
   datasource:
-    url: jdbc:h2:mem:databaseName
+    url: jdbc:h2:file:./databaseName
     driverClassName: org.h2.Driver
     username: ***
     password: ***
@@ -15,6 +15,12 @@ spring:
       path: /anyPath
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
 server:
   error:
     path: /error

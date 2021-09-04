@@ -9,8 +9,10 @@ import javax.persistence.CascadeType.ALL
 import javax.persistence.Entity
 import javax.persistence.ManyToMany
 import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
+@Table
 data class Survey(
     val purpose: String,
     val startDate: LocalDate,
