@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/scripts/clipboard.min.js"></script>
     <script type="text/javascript" src="/scripts/wow.min.js"></script>
     <script type="text/javascript" src="/scripts/initialization.js"></script>
+    <script type="text/javascript" src="/scripts/lottie-player.js"></script>
 
     <link type="text/css" rel="stylesheet" media="screen,projection" href="/css/adapted_materialize.min.css">
     <link type="text/css" rel="stylesheet" href="/css/material_icons.css">
@@ -22,7 +23,9 @@
     <div id="surveyDetails" class="col s12 m4 border whiteTriangleBackground fullWidthOfParent">
         <div class="center-align alignWelcomeTextOnMobile border stickyInParent">
             <div class="wow fadeInDown border">
-                <img class="responsive-img" alt="" src="/images/surveyWithMargin.png"/>
+                <lottie-player src="/lottieFiles/smartphone.json" background="transparent"
+                               style="margin: 0 auto;"
+                               speed="0.5" loop autoplay></lottie-player>
                 <h3>Surveyli</h3>
                 <i>Your tiny tool for sharing surveys with your friends.</i>
                 <div class="row fullWidthOfParent" th:object="${survey}">
