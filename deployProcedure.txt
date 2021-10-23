@@ -1,0 +1,5 @@
+In Terminal from IntelliJ:
+#1 mvnw clean package (jar file will be generated in target folder)
+#2 mvnw spring-boot:run (check if app runs on localhost)
+#3 mvnw com.microsoft.azure:azure-webapp-maven-plugin:1.14.0:config (walk through the questions. F1 is the free plan, appName in pom file can be changed -> will be the url domain)
+#4 mvn azure-webapp:deploy
